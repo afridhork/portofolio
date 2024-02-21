@@ -1,0 +1,4 @@
+#particles-js{ 
+   @apply fixed w-full h-full bg-[#232741] bg-no-repeat bg-cover z-[-1];
+   background-position: 50% 50%; 
+}

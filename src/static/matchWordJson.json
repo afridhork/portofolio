@@ -1,0 +1,40 @@
+{
+   "gameType" : 1,
+   "questionList": [
+      {
+         "id": 1,
+         "question": "apa ibu kota negara Indonesia",
+         "answer_id": 1,
+         "isMatched": false,
+         "isAnswered":false
+      },
+      {
+         "id": 2,
+         "question": "apa ibu kota negara Prancis",
+         "answer_id": 2,
+         "isMatched": false,
+         "isAnswered":false
+      },
+      {
+         "id": 3,
+         "question": "apa ibu kota negara Inggris",
+         "answer_id": 3,
+         "isMatched": false,
+         "isAnswered":false
+      }
+   ],
+   "answerList": [
+      {
+        "id": 1,
+        "name": "Jakarta"
+      },
+      {
+        "id": 2,
+        "name": "Paris"
+      },
+      {
+        "id": 3,
+        "name": "London"
+      }
+    ]
+}

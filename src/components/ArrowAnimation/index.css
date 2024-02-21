@@ -1,0 +1,7 @@
+.circle-style{
+   @apply flex justify-center items-center relative w-[40px] h-[40px] cursor-pointer rounded-3xl border-2 border-solid border-white translate-x-2/4 ;
+}
+
+.arrow-style{
+   @apply w-[20px] h-[20px] animate-bounce;
+}
