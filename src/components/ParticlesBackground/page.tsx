@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import 'particles.js/particles.js';
 import './index.css'
-const particlesJS = (window as any).particlesJS;
+const particlesJS = (this as any).particlesJS;
 
 const ParticlesBackground = ({children}: {children?: React.ReactNode}) => {
   useEffect(() => {
