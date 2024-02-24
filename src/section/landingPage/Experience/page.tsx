@@ -122,7 +122,7 @@ const Experience = () => {
                      {
                         contact.map((data,index)=>{
                            return(
-                              <Link href={data.url} target='_blank' className='cursor-pointer'>
+                              <Link href={data.url} target='_blank' className='cursor-pointer' key={index}>
                                  <img src={data.img} alt="" className={`w-[30px] h-[22px] ${index === 0 ? 'pr-1' : index === contact.length+1 ? 'pl-1' : 'px-1' }`} />
                               </Link>
                            )

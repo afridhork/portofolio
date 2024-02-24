@@ -22,7 +22,7 @@ export default function RootLayout({
     <LenisProvider root>
       <html lang="en">
         <body className={inter.className}>
-          <ParticlesBackground/>
+          {/* <ParticlesBackground/> */}
           <div className="flex justify-center">
             <Providers>{children}</Providers>
           </div>

@@ -100,7 +100,7 @@ export default function ExpertiseSection() {
                   exit={exit}
                   className="h-full w-full -translate-x-4 -translate-y-4 sm:flex-1"
                >
-                  <Suspense
+                  {/* <Suspense
                      fallback={
                         <div className="grid h-full w-full animate-pulse place-content-center font-mono text-2xl">
                         {`re().rendering`}
@@ -110,7 +110,7 @@ export default function ExpertiseSection() {
                      <Canvas
                         dpr={[1, 2]}
                         camera={{ position: [0, 0, 35], fov: 90 }}
-                        resize={{ polyfill: ResizeObserver }}
+                        // resize={{ polyfill: ResizeObserver }}
                         data-testid="3d-canvas"
                      >
                         <fog attach="fog" args={['#0D0409', 0, 80]} />
@@ -123,7 +123,7 @@ export default function ExpertiseSection() {
                         </Float>
                         <TrackballControls rotateSpeed={5} noPan noZoom />
                      </Canvas>
-                  </Suspense>
+                  </Suspense> */}
                </motion.div>
                <LenisProvider className='relative overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 my-8'>
                   <motion.div
