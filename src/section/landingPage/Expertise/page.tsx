@@ -100,7 +100,7 @@ export default function ExpertiseSection() {
                   exit={exit}
                   className="h-full w-full -translate-x-4 -translate-y-4 sm:flex-1"
                >
-                  {/* <Suspense
+                  <Suspense
                      fallback={
                         <div className="grid h-full w-full animate-pulse place-content-center font-mono text-2xl">
                         {`re().rendering`}
@@ -123,7 +123,7 @@ export default function ExpertiseSection() {
                         </Float>
                         <TrackballControls rotateSpeed={5} noPan noZoom />
                      </Canvas>
-                  </Suspense> */}
+                  </Suspense>
                </motion.div>
                <LenisProvider className='relative overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 my-8'>
                   <motion.div
