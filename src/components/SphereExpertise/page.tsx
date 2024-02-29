@@ -23,7 +23,7 @@ const SphereExpertise = (): JSX.Element => {
       'NPM',
       'ReactJs',
       'Redux',
-      // 'NextJs1',
+      'test',
       'VueJs',
       'NuxtJs',
       'Tailwind',
