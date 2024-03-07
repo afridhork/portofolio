@@ -86,14 +86,14 @@ const TsParticles = () => {
            animation: {
              enable: true,
              speed: 0.05,
-             sync: true,
+             sync: false,
              startValue: "max",
              count: 1,
              destroy: "min"
            },
            value: {
              min: 0,
-             max: 0.5
+             max: 1
            }
          },
          shape: {
