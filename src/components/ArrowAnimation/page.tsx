@@ -3,7 +3,7 @@ import './index.css'
 
 export default function ArrowAnimation() {
   return (
-   <div className='flex justify-center items-center pt-40'>
+   <div className='fixed flex justify-center items-center w-full pt-32'>
       <div className='circle-style mr-[40px]'>
          <svg
             className='arrow-style'

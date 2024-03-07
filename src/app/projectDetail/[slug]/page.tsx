@@ -52,9 +52,9 @@ const page = ({params}: {params: {slug: string}}) => {
               <h4 className='text-center'>Tech Stack</h4>
               <div className="flex justify-center">
                 {
-                  projectData.techStack.map((tech)=>{
+                  projectData.techStack.map((tech,index)=>{
                     return(
-                      <div className='pr-5 pt-2'>
+                      <div className='pr-5 pt-2' key={index}>
                         <img src={`/assets/${tech}.svg`} className='w-[30px] h-[30px]'/>
                       </div>
                     )

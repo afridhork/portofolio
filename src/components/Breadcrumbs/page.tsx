@@ -3,13 +3,12 @@ import React from 'react'
 export default function Breadcrumbs({data}: {data:string[]}) {
    const length = data.length - 1
   return (
-   <div className='fixed'>
-      <ol className="flex items-center gap-1 text-sm text-white">
+      <ol className="flex items-center rounded-3xl border border-white backdrop-blur-lg backdrop-filter text-sm text-white">
          {data.map((data,index)=>{
             return(
-               <div className='flex items-center' key={index}>
+               <div className='flex items-center p-2' key={index}>
                   <li key={index}>
-                     <a href="#" className="block transition text-2xl hover:text-gray-700"> {data} </a>
+                     <a href="#" className="block transition z-50 text-sm sm:text-xl hover:text-gray-700"> {data} </a>
                   </li>
                   {
                      index != length && (
@@ -33,7 +32,8 @@ export default function Breadcrumbs({data}: {data:string[]}) {
             )
          })}
       </ol>
-   </div>
+   // <div className='fixed'>
+   // </div>
 // </nav>
   )
 }

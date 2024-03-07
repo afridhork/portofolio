@@ -47,10 +47,10 @@ export const data = [
       techStack:[
          'TypeScript',
          'NextJs',
+         'Three',
          'Tailwind',
          'Framer',
-         'Lenis',
-         'Three'
+         'Lenis'
       ],
       category:'Web Development',
       content:"I build this portfolio as portofolio with TypeScript, Next.js, and Tailwind CSS to exemplify my expertise in modern web development. Leveraging Framer Motion, Lenis, and React Three Fiber, I've infused dynamic animations and 3D elements into the user experience. This digital showcase is more than a testament to my technical prowess—it's a commitment to pushing the boundaries of web innovation. Explore the synergy of creativity and functionality as each line of code narrates my journey in the dynamic landscape of web technologies. Welcome to my digital space, where innovation takes center stage! ",
@@ -142,6 +142,7 @@ export const data = [
       techStack:[
          'JavaScript',
          'NuxtJs',
+         'Axios',
          'Bootstrap',
          'IntroJs'
       ],

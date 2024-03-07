@@ -134,7 +134,7 @@ const WordMatchingGame: React.FC<WordMatchingGameProps> = (props) => {
   const answerBoxStyle: React.CSSProperties = state.isAnswered ? { ...state.position, position: 'absolute' } : {};
 
   return (
-    <div className='absolute w-full h-full'>
+    <div className='relative w-full h-full'>
       <div className="match-word">
         <div className="question-side">
           {state.quiz.map((quiz, index) => (

@@ -77,6 +77,7 @@ const SearchWordGame: React.FC<SearchWordGameProps> = (props) => {
   };
 
   const checkWord = () => {
+    
     if(!state.isAnswer){
       const { grid, selectedLetters, words } = state;
       const selectedWord = selectedLetters.map((coord) => grid[coord.col]).join('');

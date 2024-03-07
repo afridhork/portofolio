@@ -16,7 +16,7 @@ import Link from 'next/link'
 // import Instagram from '/assets/Gmail.svg'
 
 
-const Experience = () => {
+const Experience = ({style}:{style: MotionStyle}) => {
    const terminalRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -30,7 +30,7 @@ const Experience = () => {
       offset: ['0', '1']
    })
 
-   const style: MotionStyle = {
+   const style1: MotionStyle = {
       rotateX: useSmooth(scrollYProgress, [0, 0.2], [2, 0]),
       scale: useSmooth(scrollYProgress, [0, 0.2], [0.9, 1])
    }
@@ -56,7 +56,7 @@ const Experience = () => {
       {socialMedia: 'Gmail', img:'/assets/Gmail.svg', url:'https://mail.google.com/mail/u/0/?fs=1&to=afridhorkartawiria@gmail.com&tf=cm'},
    ]
   return (
-   <section className='relative pt-20 pb-44'>
+   <section className='relative py-20'>
       {/* <div style={{ perspective: '10rem' }}>
          <motion.div
             initial={{ opacity: 0, y: 100 }}
@@ -102,21 +102,21 @@ const Experience = () => {
             </div>
          </motion.div>
       </div> */}
-      <div style={{ perspective: '10rem' }}>
+      <div className='flex justify-center' style={{ perspective: '10rem' }}>
          <motion.div
             initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 200, transition: { ...transition, delay: 0.4 } }}
+            animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
             style={style}
-            ref={terminalRef}
-            className={`relative h-[32rem] w-full overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter mb-20 p-10`}
+            // ref={terminalRef}
+            className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter mb-20 p-10`}
             data-testid="terminal"
          >
             <span className='flex justify-center items-center text-white text-4xl'>About</span>
-            <div className='grid grid-cols-2 pt-8 h-full'>
-               <div className='relative col-span-1 align-center top-[15%]'>
+            <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 pt-8 h-full'>
+               <div className='hidden sm:hidden lg:block relative col-span-1 align-center top-[15%]'>
                   <div>
-                     <span className='text-4xl'>Afridho Rachmadi <br /> Kartawiria</span>
-                     <h4>SOFTWARE ENGINEER AND FRONT END DEVELOPER</h4>
+                     <span className='block text-lg sm:text-2xl lg:text-4xl'>Afridho Rachmadi <br /> Kartawiria</span>
+                     <span className='block'>SOFTWARE ENGINEER AND FRONT END DEVELOPER</span>
                   </div>
                   <div className='flex'>
                      {
@@ -132,8 +132,25 @@ const Experience = () => {
                </div>
                <div className="col-span-1 h-full overflow-hidden pb-12">
                   <LenisProvider className='h-full overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
+                     <div className='block sm:block lg:hidden relative align-center mb-5'>
+                        <div>
+                           <span className='block text-2xl sm:text-2xl lg:text-4xl'>Afridho Rachmadi <br className='block' /> Kartawiria</span>
+                           <span className='block'>SOFTWARE ENGINEER AND FRONT END DEVELOPER</span>
+                        </div>
+                        <div className='flex'>
+                           {
+                              contact.map((data,index)=>{
+                                 return(
+                                    <Link href={data.url} target='_blank' className='cursor-pointer' key={index}>
+                                       <img src={data.img} alt="" className={`w-[30px] h-[22px] ${index === 0 ? 'pr-1' : index === contact.length+1 ? 'pl-1' : 'px-1' }`} />
+                                    </Link>
+                                 )
+                              })
+                           }
+                        </div>
+                     </div>
                      <h5>Welcome to my portfolio! As a front-end web developer, I specialize in crafting engaging and intuitive user experiences. With expertise in technologies like HTML, CSS, JavaScript, and frameworks like React.js and Next.js, I bring ideas to life and create dynamic web applications. Whether it's building responsive layouts, implementing sleek animations, or optimizing for performance, I strive to deliver high-quality solutions that exceed expectations. Take a look around to explore my projects and get in touch to discuss how we can collaborate on your next digital venture!</h5>
-                     <h1 className='py-2'>Experience</h1>
+                     <span className='block text-xl sm:text-xl lg:text-2xl py-2'>Experience</span>
                      <Accordion allowToggle>
 
                         <AccordionItem>

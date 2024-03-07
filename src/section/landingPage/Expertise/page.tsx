@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react'
+import React, { RefObject, Suspense, useEffect, useRef } from 'react'
 import { motion, MotionStyle, useScroll, AnimationProps, useTransform } from 'framer-motion'
 import useSmooth from '@/hooks/useSmooth'
 import { Canvas } from '@react-three/fiber'
@@ -7,7 +7,7 @@ import SphereExpertise from '@/components/SphereExpertise/page'
 import LenisProvider from '@/libs/react-lenis'
 import { dataSkill } from '@/static/skillData'
 
-export default function ExpertiseSection() {
+export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, styleFor: (value:any)=>void}) {
    const terminalRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -21,11 +21,14 @@ export default function ExpertiseSection() {
       offset: ['0', '1']
    })
 
-   const style: MotionStyle = {
-      rotateX: useSmooth(scrollYProgress, [0, 0.2], [2, 0]),
-      scale: useSmooth(scrollYProgress, [0, 0.2], [0.9, 1])
+   const styleForWork: MotionStyle = {
+      rotateX: useSmooth(scrollYProgress, [0, 1], [2, 0]),
+      scale: useSmooth(scrollYProgress, [0, 1], [0.8, 1])
    }
-
+   useEffect(() => {
+      styleFor(styleForWork)
+   }, [])
+   
    const initial: AnimationProps['initial'] = { opacity: 0 }
    const animate: AnimationProps['animate'] = {
       opacity: 1,
@@ -33,6 +36,7 @@ export default function ExpertiseSection() {
          ease: 'easeInOut'
       }
    }
+   
    const exit: AnimationProps['exit'] = {
       opacity: 0,
       transition: {
@@ -48,49 +52,19 @@ export default function ExpertiseSection() {
    const data = [...dataSkill]
 
   return (
-   <section className='relative'>
-      <div style={{ perspective: '10rem' }}>
+   <section 
+      className='relative'
+      ref={terminalRef}
+   >
+      <div className='flex justify-center' style={{ perspective: '10rem' }}>
          <motion.div
             initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 200, transition: { ...transition, delay: 0.4 } }}
+            animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
             style={style}
-            ref={terminalRef}
-            className={`relative h-[32rem] w-full overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-10`}
+            // ref={terminalRef}
+            className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-10`}
             data-testid="terminal"
          >
-            {/* <AnimatePresence>
-               <div className='flex justify-center items-center'>
-                  <div>
-                     <div className='flex justify-center'>
-                        <div className='relative'>
-                           <div className='flex justify-center'>
-                              <div className='card max-w-[330px] p-6'>
-                                 <div className="flex items-center gap-3 mb-5">
-                                    <img src={javascriptIcon.src} className='w-12 h-12' alt="" />
-                                    <h2>Programming and Markup Languages</h2>
-                                 </div>
-                                 <h4 className='relative flex items-start'>Experienced in both functional and OOP: JavaScript, TypeScript, PHP, CSS, HTML.</h4>
-                              </div>
-                              <div className='card max-w-[330px] p-6'>
-                                 <div className="flex items-center gap-3 mb-5 h-[64px]">
-                                    <img src={gitIcon.src} className='w-12 h-12' alt="" />
-                                    <h2>Development <br /> Tools</h2>
-                                 </div>
-                                 <h4 className='relative flex items-start'>Experienced in Git, GitLab, GitHub and VisualStudio Code.</h4>
-                              </div>
-                              <div className='card max-w-[330px] p-6'>
-                                 <div className="flex items-center gap-3 mb-5">
-                                    <img src={reactIcon.src} className='w-12 h-12' alt="" />
-                                    <h2>Frameworks and Libraries</h2>
-                                 </div>
-                                 <h4 className='relative flex items-start'>Experienced in NodeJs, ReactJs, NextJs, Redux, VueJs, NuxtJs, Axios, Jest, React Test Library, NPM, Framer, Three, Bootstrap and Tailwind.</h4>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </AnimatePresence> */}
             <span className='flex justify-center items-center text-white text-4xl'>My Skills</span>
             <div className='relative flex overflow-hidden h-full'>
                <motion.div
@@ -98,7 +72,7 @@ export default function ExpertiseSection() {
                   initial={initial}
                   animate={animate}
                   exit={exit}
-                  className="h-full w-full -translate-x-4 -translate-y-4 sm:flex-1"
+                  className="hidden sm:block lg:block h-full w-full -translate-x-4 -translate-y-4 sm:flex-1"
                >
                   <Suspense
                      fallback={

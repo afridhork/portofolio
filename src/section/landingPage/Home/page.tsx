@@ -30,8 +30,8 @@ export default function HomeSection() {
         }}
       >
         <div className='fixed'>
-          <span className='text-white text-center text-8xl'>Afridho R Kartawiria</span>
-          <h2 className='text-white text-center mt-3'>SOFTWARE ENGINEER AND FRONT END DEVELOPER</h2>
+          <span className='flex justify-center text-white text-3xl sm:text-5xl lg:text-8xl'>Afridho R Kartawiria</span>
+          <span className='flex justify-center text-white text-sm sm:text-lg lg:text-2xl mt-0 sm:mt-3'>SOFTWARE ENGINEER AND FRONT END DEVELOPER</span>
         </div>
       </motion.div>
       {/* <div style={{ perspective: '10rem' }}>
@@ -46,7 +46,9 @@ export default function HomeSection() {
         >
         </motion.div>
       </div> */}
-      {/* <ArrowAnimation/> */}
+      <motion.div style={{...text}}>
+        <ArrowAnimation/>
+      </motion.div>
     </section>
   )
 }

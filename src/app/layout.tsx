@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import LenisProvider from '@/libs/react-lenis'
 import ParticlesBackground from '@/components/ParticlesBackground/page'
+import TsParticles from '@/components/TsParticles/page'
 import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,8 +22,9 @@ export default function RootLayout({
     <LenisProvider root>
       <html lang="en">
         <body className={inter.className}>
-            <ParticlesBackground/>
-          <div className="flex justify-center">
+            {/* <ParticlesBackground/> */}
+            <TsParticles/>
+          <div className="flex justify-center overflow-x-auto">
             <Providers>{children}</Providers>
           </div>
         </body>

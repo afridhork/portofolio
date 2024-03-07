@@ -147,7 +147,7 @@
     border-radius: 10px;
  }
  
- @media screen and (max-width: 580px){
+ /* @media screen and (max-width: 580px){
    .question {
      font-size: 15px;
      margin-bottom: 0px;
@@ -163,8 +163,6 @@
      border-radius: 5px;
      margin: 25px 5px;
      transition: background-color 0.3s, transform 0.3s;
-     /* animation: moveBox 2s linear infinite;
-     animation: returnAnimation 3s ease-in-out infinite; */
      transition: transform 0.3s ease-in-out;
    }
    .drop-zone {
@@ -178,7 +176,7 @@
      text-align: center;
      transition: background-color 0.3s;
    }
- }
+ } */
  
  @keyframes moveBox {
    0% {
