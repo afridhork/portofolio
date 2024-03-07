@@ -7,8 +7,8 @@ import SphereExpertise from '@/components/SphereExpertise/page'
 import LenisProvider from '@/libs/react-lenis'
 import { dataSkill } from '@/static/skillData'
 
-export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, styleFor: (value:any)=>void}) {
-   const terminalRef = useRef<HTMLDivElement>(null)
+export default function ExpertiseSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
+   const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
       stiffness: 300,
@@ -17,7 +17,7 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
    }
    
    const { scrollYProgress } = useScroll({
-      target: terminalRef,
+      target: currentRef,
       offset: ['0', '1']
    })
 
@@ -26,7 +26,9 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
       scale: useSmooth(scrollYProgress, [0, 1], [0.8, 1])
    }
    useEffect(() => {
-      styleFor(styleForWork)
+      if(currentRef.current){
+         getAttribute(styleForWork, currentRef.current?.offsetTop)
+      }
    }, [])
    
    const initial: AnimationProps['initial'] = { opacity: 0 }
@@ -54,14 +56,14 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
   return (
    <section 
       className='relative'
-      ref={terminalRef}
+      ref={currentRef}
    >
       <div className='flex justify-center' style={{ perspective: '10rem' }}>
          <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
             style={style}
-            // ref={terminalRef}
+            // ref={currentRef}
             className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-10`}
             data-testid="terminal"
          >

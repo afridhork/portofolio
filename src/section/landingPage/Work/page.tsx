@@ -9,21 +9,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import MatchJson from '@/static/matchWordJson.json'
 
-interface Choice {
-   name: string;
-   id: number;
- }
- 
- interface Quiz {
-   id: number;
-   question: string;
-   answer_id: number;
-   isAnswered?: boolean;
-   isMatched?: boolean;
- }
-
-
-export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, styleFor: (value:any)=>void}) {
+export default function WorkSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
       questionList: [
@@ -47,9 +33,7 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
       setMatchWordData(data)
    }, [])
    
-
-
-   const terminalRef = useRef<HTMLDivElement>(null)
+   const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
       stiffness: 300,
@@ -58,7 +42,7 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
    }
    
    const { scrollYProgress } = useScroll({
-      target: terminalRef,
+      target: currentRef,
       offset: ['0', '1']
    })
 
@@ -68,7 +52,9 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
    }
 
    useEffect(() => {
-      styleFor(styleForExperience)
+      if(currentRef.current){
+         getAttribute(styleForExperience, currentRef.current?.offsetTop)
+      }
    }, [])
 
    const initial: AnimationProps['initial'] = { opacity: 0 }
@@ -88,13 +74,13 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
 
 
   return (
-   <section className='relative pt-20' ref={terminalRef}>
+   <section className='relative pt-20' ref={currentRef}>
       <div className='flex justify-center' style={{ perspective: '10rem' }}>
          <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
             style={style}
-            // ref={terminalRef}
+            // ref={currentRef}
             className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8`}
             data-testid="terminal"
          >
@@ -117,7 +103,7 @@ export default function ExpertiseSection({style, styleFor}:{style: MotionStyle, 
                            <div className='col-span-1 border border-white h-[85%]'>
                               <FindWord question='question' answer='answer' />
                            </div>
-                           <div className='relative col-span-1 border border-white h-[85%]'>
+                           <div className='hidden sm:block relative col-span-1 border border-white h-[85%]'>
                               <MatchWord question={matchWordData.questionList} answer={matchWordData.answerList} />
                            </div>
                         </div>

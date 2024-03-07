@@ -7,12 +7,11 @@ import {
 } from 'framer-motion';
 import useSmooth from '@/hooks/useSmooth'
 
-export default function HomeSection() {
-  const terminalRef = useRef<HTMLDivElement>(null)
-  const ref = useRef<HTMLDivElement>(null)
+export default function HomeSection({getAttribute}: {getAttribute: (value:any)=> void}) {
+  const currentRef = useRef<HTMLDivElement>(null)
   
   const { scrollYProgress } = useScroll({
-    target: terminalRef,
+    target: currentRef,
     offset: ['0', '1']
   })
 
@@ -21,7 +20,7 @@ export default function HomeSection() {
   }
 
   return (
-    <section ref={ref} className='relative'>
+    <section ref={currentRef} className='relative'>
       <motion.div 
         className='relative min-h-[140px] flex justify-center items-center pb-5' 
         style={{

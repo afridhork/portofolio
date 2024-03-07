@@ -1,14 +1,35 @@
-import React from 'react'
+import { useSpring } from 'framer-motion';
+import React, { useEffect } from 'react'
 
-export default function Breadcrumbs({data}: {data:string[]}) {
+interface breadcrumbs {
+   topPos: number,
+   name: string
+}
+
+export default function Breadcrumbs({data}: {data:breadcrumbs[]}) {
    const length = data.length - 1
+   const spring = useSpring(0, { damping: 100, stiffness: 100 });
+
+   useEffect(() => {
+     spring.onChange(latest => {
+       window.scrollTo(0, latest);
+     });
+   }, [spring]);
+
+   const moveTo = (to: any) => {
+      spring.set(window.pageYOffset, false);
+      spring.set(to);
+   //    setTimeout(() => {
+   //  }, 50);
+}
+
   return (
       <ol className="flex items-center rounded-3xl border border-white backdrop-blur-lg backdrop-filter text-sm text-white">
          {data.map((data,index)=>{
             return(
                <div className='flex items-center p-2' key={index}>
-                  <li key={index}>
-                     <a href="#" className="block transition z-50 text-sm sm:text-xl hover:text-gray-700"> {data} </a>
+                  <li key={index} onClick={() => moveTo(data.topPos)}>
+                     <a href="#" className="block transition z-50 text-sm sm:text-xl hover:text-gray-700"> {data.name} </a>
                   </li>
                   {
                      index != length && (

@@ -1,4 +1,4 @@
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense, useEffect, useRef } from 'react'
 import { AnimationProps, MotionStyle, motion, useScroll, useTransform } from 'framer-motion'
 import useSmooth from '@/hooks/useSmooth'
 import { Accordion } from '@chakra-ui/react'
@@ -16,17 +16,18 @@ import Link from 'next/link'
 // import Instagram from '/assets/Gmail.svg'
 
 
-const Experience = ({style}:{style: MotionStyle}) => {
-   const terminalRef = useRef<HTMLDivElement>(null)
+const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any)=>void}) => {
+   const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
       stiffness: 300,
       damping: 50,
       restDelta: 0.001
    }
+   console.log('cek ref', currentRef);
    
    const { scrollYProgress } = useScroll({
-      target: terminalRef,
+      target: currentRef,
       offset: ['0', '1']
    })
 
@@ -34,6 +35,10 @@ const Experience = ({style}:{style: MotionStyle}) => {
       rotateX: useSmooth(scrollYProgress, [0, 0.2], [2, 0]),
       scale: useSmooth(scrollYProgress, [0, 0.2], [0.9, 1])
    }
+
+   useEffect(() => {
+      getAttribute(currentRef.current?.offsetTop)
+   }, [])
 
    const initial: AnimationProps['initial'] = { opacity: 0 }
    const animate: AnimationProps['animate'] = {
@@ -56,58 +61,16 @@ const Experience = ({style}:{style: MotionStyle}) => {
       {socialMedia: 'Gmail', img:'/assets/Gmail.svg', url:'https://mail.google.com/mail/u/0/?fs=1&to=afridhorkartawiria@gmail.com&tf=cm'},
    ]
   return (
-   <section className='relative py-20'>
-      {/* <div style={{ perspective: '10rem' }}>
-         <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 200, transition: { ...transition, delay: 0.4 } }}
-            style={style}
-            ref={terminalRef}
-            className={`relative h-[32rem] w-full overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-10`}
-            data-testid="terminal"
-         >
-            <span className='flex justify-center items-center text-white text-4xl'>My Experience</span>
-            <div className='pt-24 px-20'>
-               <Accordion allowToggle>
-                  <AccordionItem>
-                     <h2>
-                        <AccordionButton>
-                        <Box as="span" flex='1' textAlign='left'>
-                           Educational Experience
-                        </Box>
-                        <AccordionIcon />
-                        </AccordionButton>
-                     </h2>
-                     <AccordionPanel pb={4}>
-                        <h4>Computer Science University of Lampung (2019-2020)</h4>
-                        <p>I am Graduated with a bachelor's degree and learning the basics of programming and IT-related concepts here.</p>
-                     </AccordionPanel>
-                  </AccordionItem>
-
-                  <AccordionItem>
-                     <h2>
-                        <AccordionButton>
-                        <Box as="span" flex='1' textAlign='left'>
-                           Work Experience
-                        </Box>
-                        <AccordionIcon />
-                        </AccordionButton>
-                     </h2>
-                     <AccordionPanel pb={4}>
-                        <h4>ATT Group (2021-present)</h4>
-                        <p>Crafting websites as a front-end developer with Nuxt.js or React.js, serving as the JavaScript framework and library. Slicing the design from Figma with Bootstrap as the CSS library and seamlessly connecting to APIs with the power of Axios. While working here, I also delved into technologies beyond those used in the office, such as the latest versions of React.js, Next.js, Redux toolkit, Tailwind, and more.</p>
-                     </AccordionPanel>
-                  </AccordionItem>
-               </Accordion>
-            </div>
-         </motion.div>
-      </div> */}
+   <section 
+      className='relative py-20'
+      ref={currentRef}
+   >
       <div className='flex justify-center' style={{ perspective: '10rem' }}>
          <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
             style={style}
-            // ref={terminalRef}
+            // ref={currentRef}
             className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter mb-20 p-10`}
             data-testid="terminal"
          >
