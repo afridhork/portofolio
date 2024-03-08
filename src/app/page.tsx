@@ -31,10 +31,10 @@ export default function Home() {
   })
 
   const [breadcrumbs, setBreadcrumbs] = useState([
-    {topPos: 0, name: 'Home'},
-    {topPos: 0, name: 'Expertise'},
-    {topPos: 0, name: 'Work'},
-    {topPos: 0, name: 'Experience'},
+    {goTo: 0, name: 'Home'},
+    {goTo: 0, name: 'Expertise'},
+    {goTo: 0, name: 'Work'},
+    {goTo: 0, name: 'Experience'},
   ])
 
   
@@ -43,7 +43,7 @@ export default function Home() {
       if(object.name === 'Home'){
         return {
           ...object,
-          topPos: value,
+          goTo: value,
         }
       }
       return object
@@ -56,7 +56,7 @@ export default function Home() {
       if(object.name === 'Expertise'){
         return {
           ...object,
-          topPos: pos - 30,
+          goTo: pos - 30,
         }
       }
       return object
@@ -69,7 +69,7 @@ export default function Home() {
       if(object.name === 'Work'){
         return {
           ...object,
-          topPos: pos + 50,
+          goTo: pos + 50,
         }
       }
       return object
@@ -81,7 +81,7 @@ export default function Home() {
       if(object.name === 'Experience'){
         return {
           ...object,
-          topPos: value + 50,
+          goTo: value + 50,
         }
       }
       return object
@@ -93,7 +93,7 @@ export default function Home() {
     <div>
       {/* <ParticlesBackground/> */}
         <div className='fixed flex justify-center z-10 w-full pt-4'>
-          <Breadcrumbs data={breadcrumbs}/>
+          <Breadcrumbs data={breadcrumbs} isDetail={false}/>
         </div>
         <div className='pt-60' ref={ref}>
           <div className='flex flex-col justify-center'>

@@ -7,6 +7,11 @@ import ImageSlider from '@/components/chakraCarousel/page'
 
 const page = ({params}: {params: {slug: string}}) => {
   const dataBreadcrumbs: string[] = ['Main', 'Project Detail', `${params.slug.replace(/%20/g, " ")}`]
+  const [breadcrumbs, setBreadcrumbs] = useState([
+    {goTo: '/', name: 'Main'},
+    {goTo: `/projectDetail/${params.slug.replace(/%20/g, " ")}`, name: 'Project Detail'},
+    {goTo: `/projectDetail/${params.slug.replace(/%20/g, " ")}`, name: `${params.slug.replace(/%20/g, " ")}`},
+  ])
   const [projectData, setProjectData] = useState<projectData>({
     name: '',
     techStack:[],
@@ -35,14 +40,14 @@ const page = ({params}: {params: {slug: string}}) => {
   
   return (
     <div>
-      <div className='flex justify-center pt-4 pb-44'>
-        <Breadcrumbs data={dataBreadcrumbs}/>
+      <div className='fixed flex justify-center left-0 z-10 w-full pt-4 pb-44'>
+        <Breadcrumbs data={breadcrumbs} isDetail={true}/>
       </div>
-      <div className='pb-10'>
-        <div className='border border-white backdrop-blur-lg backdrop-filter w-[700px] p-5 rounded-lg'>
+      <div className='flex justify-center pt-40 pb-10'>
+        <div className='border border-white backdrop-blur-lg backdrop-filter w-[85%] sm:w-[65%] p-5 rounded-lg'>
           <div>
             <h5>{projectData.category}</h5>
-            <span className='text-6xl text-white'>{params.slug.replace(/%20/g, " ")}</span>
+            <span className='text-2xl sm:text-6xl text-white'>{params.slug.replace(/%20/g, " ")}</span>
           </div>
           <div className='pt-10'>
             <p>{projectData.content}</p>
@@ -55,7 +60,7 @@ const page = ({params}: {params: {slug: string}}) => {
                   projectData.techStack.map((tech,index)=>{
                     return(
                       <div className='pr-5 pt-2' key={index}>
-                        <img src={`/assets/${tech}.svg`} className='w-[30px] h-[30px]'/>
+                        <img src={`/assets/${tech === 'NextJs' ? 'test' : tech}.svg`} className='w-[30px] h-[30px]'/>
                       </div>
                     )
                   })

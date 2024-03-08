@@ -1,14 +1,16 @@
 import { useSpring } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 
 interface breadcrumbs {
-   topPos: number,
+   goTo: number | string,
    name: string
 }
 
-export default function Breadcrumbs({data}: {data:breadcrumbs[]}) {
+export default function Breadcrumbs({data, isDetail}: {data:breadcrumbs[], isDetail: boolean}) {
    const length = data.length - 1
    const spring = useSpring(0, { damping: 100, stiffness: 100 });
+   const Router = useRouter()
 
    useEffect(() => {
      spring.onChange(latest => {
@@ -17,8 +19,12 @@ export default function Breadcrumbs({data}: {data:breadcrumbs[]}) {
    }, [spring]);
 
    const moveTo = (to: any) => {
-      spring.set(window.pageYOffset, false);
-      spring.set(to);
+      if(!isDetail){
+         spring.set(window.pageYOffset, false);
+         spring.set(to);
+      }else{
+         Router.push(`${to}`)
+      }
    //    setTimeout(() => {
    //  }, 50);
 }
@@ -28,8 +34,8 @@ export default function Breadcrumbs({data}: {data:breadcrumbs[]}) {
          {data.map((data,index)=>{
             return(
                <div className='flex items-center p-2' key={index}>
-                  <li key={index} onClick={() => moveTo(data.topPos)}>
-                     <a href="#" className="block transition z-50 text-sm sm:text-xl hover:text-gray-700"> {data.name} </a>
+                  <li className='cursor-pointer' key={index} onClick={() => moveTo(isDetail ? data.goTo : data.name)}>
+                     <span className="block transition z-50 text-sm sm:text-xl hover:text-gray-700"> {data.name} </span>
                   </li>
                   {
                      index != length && (
