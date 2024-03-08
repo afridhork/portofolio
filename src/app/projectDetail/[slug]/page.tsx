@@ -52,15 +52,15 @@ const page = ({params}: {params: {slug: string}}) => {
           <div className='pt-10'>
             <p>{projectData.content}</p>
           </div>
-          <div className='grid grid-cols-2 pt-5 pb-8'>
+          <div className='grid grid-cols-2 gap-x-4 pt-5 pb-8'>
             <div className='col-span-1'>
               <h4 className='text-center'>Tech Stack</h4>
-              <div className="flex justify-center">
+              <div className={`grid grid-cols-${projectData.techStack.length} gap-y-4 pb-2`}>
                 {
                   projectData.techStack.map((tech,index)=>{
                     return(
-                      <div className='pr-5 pt-2' key={index}>
-                        <img src={`/assets/${tech === 'NextJs' ? 'test' : tech}.svg`} className='w-[30px] h-[30px]'/>
+                      <div className='col-span-1 flex justify-center' key={index}>
+                        <img src={`/assets/${tech === 'NextJs' ? 'test' : tech}.svg`} className='w-[20px] sm:w-[30px] h-[15px] sm:w-[20px]'/>
                       </div>
                     )
                   })
@@ -71,7 +71,7 @@ const page = ({params}: {params: {slug: string}}) => {
               <h4 className='text-center'>Url Link</h4>
               <a className='flex justify-center items-center pt-2' href={projectData.link} target='_blank'>
                 <img src="/assets/link.svg" className='w-[20px] h-[20px]' alt="" />
-                <p>{projectData.link}</p>
+                <span className='text-[8px] sm:text-xs text-white'>{projectData.link}</span>
               </a>
             </div>
           </div>

@@ -5,6 +5,13 @@ import dc_image from '@/assets/deacourse/dc-landingPage.png'
 import pt_image from '@/assets/porto/pt-landingPage.png'
 import lpk_image from '@/assets/lpk/lpk-landingPage.png'
 
+//afridhork
+import pt_lp from '@/assets/porto/pt-landingPage.png' 
+import pt_sp from '@/assets/porto/pt-skillPage.png' 
+import pt_dp from '@/assets/porto/pt-detailPage.png' 
+
+
+
 // shopCart
 import sc_lp from '@/assets/shopcart/data/sc-landindPage-lg.png' 
 import sc_ctg from '@/assets/shopcart/data/sc-category.png' 
@@ -56,7 +63,11 @@ export const data = [
       content:"I build this portfolio as portofolio with TypeScript, Next.js, and Tailwind CSS to exemplify my expertise in modern web development. Leveraging Framer Motion, Lenis, and React Three Fiber, I've infused dynamic animations and 3D elements into the user experience. This digital showcase is more than a testament to my technical prowess—it's a commitment to pushing the boundaries of web innovation. Explore the synergy of creativity and functionality as each line of code narrates my journey in the dynamic landscape of web technologies. Welcome to my digital space, where innovation takes center stage! ",
       link:'https://afridhork.vercel.app/',
       thumbnail:pt_image.src,
-      images:[]
+      images:[
+         {image:pt_lp.src},
+         {image:pt_sp.src},
+         {image:pt_dp.src}
+      ]
    },
    {
       name: 'ShopCart',
