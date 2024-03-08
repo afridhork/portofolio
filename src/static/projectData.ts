@@ -142,6 +142,7 @@ export const data = [
          'Vite'
       ],
       category:'Web Development',
+      content:'Shop List Page! Crafted with TypeScript, ReactJS, Redux, Tailwind CSS, and Vite, it embodies our dedication to top-tier development. Seamlessly blending advanced tech with sleek design, it offers an intuitive browsing experience. Discover a wide range of products effortlessly with name and category filters, plus customizable sorting. Our showcase reflects our commitment to dynamic, user-centric web solutions, enhancing the online shopping journey. Experience innovation and creativity in every line of code.',
       link:'https://dea-coruse-project.vercel.app/',
       thumbnail:dc_image.src,
       images:[

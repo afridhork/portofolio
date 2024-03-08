@@ -54,13 +54,13 @@ const page = ({params}: {params: {slug: string}}) => {
           </div>
           <div className='grid grid-cols-2 gap-x-4 pt-5 pb-8'>
             <div className='col-span-1'>
-              <h4 className='text-center'>Tech Stack</h4>
-              <div className={`grid grid-cols-${projectData.techStack.length} gap-y-4 pb-2`}>
+              <h4 className='text-center pb-2'>Tech Stack</h4>
+              <div className={`grid grid-cols-4 gap-y-4 pb-2`}>
                 {
                   projectData.techStack.map((tech,index)=>{
                     return(
-                      <div className='col-span-1 flex justify-center' key={index}>
-                        <img src={`/assets/${tech === 'NextJs' ? 'test' : tech}.svg`} className='w-[20px] sm:w-[30px] h-[15px] sm:w-[20px]'/>
+                      <div className='flex justify-center' key={index}>
+                        <img src={`/assets/${tech === 'NextJs' ? 'test' : tech}.svg`} className='w-[20px] sm:w-[30px] h-[15px] sm:h-[20px]'/>
                       </div>
                     )
                   })

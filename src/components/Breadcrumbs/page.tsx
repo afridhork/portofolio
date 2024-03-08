@@ -13,7 +13,7 @@ export default function Breadcrumbs({data, isDetail}: {data:breadcrumbs[], isDet
    const Router = useRouter()
 
    useEffect(() => {
-     spring.onChange(latest => {
+     spring.on('change',latest => {
        window.scrollTo(0, latest);
      });
    }, [spring]);
