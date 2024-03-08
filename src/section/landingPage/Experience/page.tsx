@@ -24,7 +24,6 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
       damping: 50,
       restDelta: 0.001
    }
-   console.log('cek ref', currentRef);
    
    const { scrollYProgress } = useScroll({
       target: currentRef,
