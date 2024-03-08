@@ -114,7 +114,7 @@ export const data = [
       techStack:[
          'Javascript',
          'Express',
-         'Ejs',
+         'ejs',
          'Bootstrap',
          'Mongoose',
          'Chai'
