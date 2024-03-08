@@ -34,7 +34,7 @@ export default function Breadcrumbs({data, isDetail}: {data:breadcrumbs[], isDet
          {data.map((data,index)=>{
             return(
                <div className='flex items-center p-2' key={index}>
-                  <li className='cursor-pointer' key={index} onClick={() => moveTo(isDetail ? data.goTo : data.name)}>
+                  <li className='cursor-pointer' key={index} onClick={() => moveTo(data.goTo)}>
                      <span className="block transition z-50 text-sm sm:text-xl hover:text-gray-700"> {data.name} </span>
                   </li>
                   {
