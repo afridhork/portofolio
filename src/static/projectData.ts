@@ -45,7 +45,7 @@ export const data = [
    {
       name: 'AfridhoRK',
       techStack:[
-         'TypeScript',
+         'Typescript',
          'NextJs',
          'Three',
          'Tailwind',
@@ -54,14 +54,14 @@ export const data = [
       ],
       category:'Web Development',
       content:"I build this portfolio as portofolio with TypeScript, Next.js, and Tailwind CSS to exemplify my expertise in modern web development. Leveraging Framer Motion, Lenis, and React Three Fiber, I've infused dynamic animations and 3D elements into the user experience. This digital showcase is more than a testament to my technical prowess—it's a commitment to pushing the boundaries of web innovation. Explore the synergy of creativity and functionality as each line of code narrates my journey in the dynamic landscape of web technologies. Welcome to my digital space, where innovation takes center stage! ",
-      link:'https://dea-coruse-project.vercel.app/',
+      link:'https://afridhork.vercel.app/',
       thumbnail:pt_image.src,
       images:[]
    },
    {
       name: 'ShopCart',
       techStack:[
-         'TypeScript',
+         'Typescript',
          'NextJs',
          'Redux', 
          'Tailwind',
@@ -82,7 +82,7 @@ export const data = [
    {
       name: 'StayCation',
       techStack:[
-         'TypeScript',
+         'Typescript',
          'ReactJs',
          'Redux',  
          'Tailwind',
@@ -101,7 +101,7 @@ export const data = [
    {
       name: 'Admin StayCation',
       techStack:[
-         'JavaScript',
+         'Javascript',
          'Express',
          'Ejs',
          'Bootstrap',
@@ -124,7 +124,7 @@ export const data = [
    {
       name: 'ShopList',
       techStack:[
-         'TypeScript',
+         'Typescript',
          'ReactJs',
          'Redux',
          'Tailwind',
@@ -140,7 +140,7 @@ export const data = [
    {
       name: 'Rumah LPK',
       techStack:[
-         'JavaScript',
+         'Javascript',
          'NuxtJs',
          'Axios',
          'Bootstrap',
