@@ -12,7 +12,11 @@ import { useRouter } from 'next/navigation'
 export default function Home() {
   const router = useRouter();
   useEffect(() => {
-    router.refresh();
+    setTimeout(() => {
+      location.reload;
+      console.log('cek');
+    }, 500);
+    
   }, [])
   
   const ref = useRef<HTMLDivElement>(null)
