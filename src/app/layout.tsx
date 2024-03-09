@@ -23,7 +23,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
             {/* <ParticlesBackground/> */}
-            <TsParticles/>
+          <TsParticles/>
           <div className="flex justify-center overflow-x-auto">
             <Providers>{children}</Providers>
           </div>

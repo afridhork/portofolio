@@ -7,8 +7,14 @@ import ExperienceSection from '../section/landingPage/Experience/page'
 import { useEffect, useRef, useState } from 'react'
 import { MotionStyle, useScroll } from 'framer-motion'
 import useSmooth from '@/hooks/useSmooth'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    router.refresh();
+  }, [])
+  
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -38,6 +44,7 @@ export default function Home() {
   ])
 
   
+
   const fromHome = (value: any) => {
     setBreadcrumbs(prevState => prevState.map(object => {
       if(object.name === 'Home'){
