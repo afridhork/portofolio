@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ArrowAnimation from '@/components/ArrowAnimation/page'
 import { 
   motion,
@@ -18,6 +18,12 @@ export default function HomeSection({getAttribute}: {getAttribute: (value:any)=>
   const text: MotionStyle = {
     opacity: useSmooth(scrollYProgress, [0, 0.2], [1, 0])
   }
+
+  useEffect(() => {
+    if(currentRef.current){
+       getAttribute(0)
+    }
+ }, [])
 
   return (
     <section ref={currentRef} className='relative'>

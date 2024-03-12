@@ -9,7 +9,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import MatchJson from '@/static/matchWordJson.json'
 
-export default function WorkSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
+export default function ProjectsSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
       questionList: [

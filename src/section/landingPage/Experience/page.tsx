@@ -61,7 +61,7 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
    ]
   return (
    <section 
-      className='relative py-20'
+      className='relative pt-20'
       ref={currentRef}
    >
       <div className='flex justify-center' style={{ perspective: '10rem' }}>
