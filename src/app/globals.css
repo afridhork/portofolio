@@ -7,6 +7,9 @@
 }
 
 @layer base {
+  body {
+    @apply bg-[#232741];
+  }
   h1 {
     @apply text-3xl text-white !important;
   }
