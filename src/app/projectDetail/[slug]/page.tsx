@@ -9,7 +9,6 @@ const page = ({params}: {params: {slug: string}}) => {
   const dataBreadcrumbs: string[] = ['Main', 'Project Detail', `${params.slug.replace(/%20/g, " ")}`]
   const [breadcrumbs, setBreadcrumbs] = useState([
     {goTo: '/', name: 'Main'},
-    {goTo: `/projectDetail/${params.slug.replace(/%20/g, " ")}`, name: 'Project Detail'},
     {goTo: `/projectDetail/${params.slug.replace(/%20/g, " ")}`, name: `${params.slug.replace(/%20/g, " ")}`},
   ])
   const [projectData, setProjectData] = useState<projectData>({
