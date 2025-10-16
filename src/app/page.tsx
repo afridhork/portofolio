@@ -76,7 +76,7 @@ export default function Home() {
     }))
   }
 
-  const fromrExpertise = (value: any, pos: number) => {
+  const fromExpertise = (value: any, pos: number) => {
     setStyleproject(value)
     setBreadcrumbs(prevState => prevState.map(object => {
       if(object.name === 'Expertise'){
@@ -120,7 +120,7 @@ export default function Home() {
     }))
   }
 
-  const fromExperience = (value: any) => {
+  const fromExperience = (value: any, pos: number) => {
     setBreadcrumbs(prevState => prevState.map(object => {
       if(object.name === 'Experience'){
         return {
@@ -151,7 +151,7 @@ export default function Home() {
         <div className='pt-60' ref={ref}>
           <div className='flex flex-col justify-center'>
             <HomeSection getAttribute={fromHome}/>
-            <ExpertiseSection style={styleExpertise} getAttribute={fromrExpertise}/>
+            <ExpertiseSection style={styleExpertise} getAttribute={fromExpertise}/>
             <ProjectsSection style={styleproject} getAttribute={fromProject}/>
             <ExperienceSection style={styleExperience} getAttribute={fromExperience}/>
           </div>

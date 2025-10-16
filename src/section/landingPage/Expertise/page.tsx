@@ -27,7 +27,12 @@ export default function ExpertiseSection({style, getAttribute}:{style: MotionSty
    }
    useEffect(() => {
       if(currentRef.current){
-         getAttribute(styleForWork, currentRef.current?.offsetTop)
+         setTimeout(() => {
+            const rect = currentRef.current?.getBoundingClientRect();
+            if(rect){
+               getAttribute(styleForWork, rect.top)
+            }
+         }, 500);
       }
    }, [])
    

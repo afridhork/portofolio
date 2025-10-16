@@ -53,7 +53,13 @@ export default function ProjectsSection({style, getAttribute}:{style: MotionStyl
 
    useEffect(() => {
       if(currentRef.current){
-         getAttribute(styleForExperience, currentRef.current?.offsetTop)
+         // getAttribute(styleForExperience, currentRef.current?.offsetTop)
+         setTimeout(() => {
+            const rect = currentRef.current?.getBoundingClientRect();
+            if(rect){
+               getAttribute(styleForExperience, rect.top)
+            }
+         }, 500);
       }
    }, [])
 

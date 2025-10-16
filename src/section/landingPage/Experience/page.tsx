@@ -16,7 +16,7 @@ import Link from 'next/link'
 // import Instagram from '/assets/Gmail.svg'
 
 
-const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any)=>void}) => {
+const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) => {
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -36,7 +36,9 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
    }
 
    useEffect(() => {
-      getAttribute(currentRef.current?.offsetTop)
+      if(currentRef.current){
+         getAttribute(style1, currentRef.current?.offsetTop)
+      }
    }, [])
 
    const initial: AnimationProps['initial'] = { opacity: 0 }
