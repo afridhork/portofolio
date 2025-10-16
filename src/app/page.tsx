@@ -120,7 +120,7 @@ export default function Home() {
     }))
   }
 
-  const fromExperience = (value: any, pos: number) => {
+  const fromExperience = (value: any) => {
     setBreadcrumbs(prevState => prevState.map(object => {
       if(object.name === 'Experience'){
         return {
