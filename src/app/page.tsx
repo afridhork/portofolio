@@ -48,11 +48,11 @@ export default function Home() {
   useEffect(() => {
     const breadcrumbsLocalStorage = JSON.parse(localStorage.getItem("breadcrumbs") as any);
     const allBreadcrumbsDone = isBreadcumbsDone.every(breadcrumb => breadcrumb.home && breadcrumb.expertise && breadcrumb.experience);
-    if (allBreadcrumbsDone && !breadcrumbsLocalStorage) {
-      localStorage.setItem("breadcrumbs", JSON.stringify(breadcrumbs));
-    } else if(allBreadcrumbsDone && breadcrumbsLocalStorage) {
-      setBreadcrumbs(breadcrumbsLocalStorage);
-    }
+    // if (allBreadcrumbsDone && !breadcrumbsLocalStorage) {
+    //   localStorage.setItem("breadcrumbs", JSON.stringify(breadcrumbs));
+    // } else if(allBreadcrumbsDone && breadcrumbsLocalStorage) {
+    //   setBreadcrumbs(breadcrumbsLocalStorage);
+    // }
   }, [isBreadcumbsDone])
   
   const fromHome = (value: any) => {
