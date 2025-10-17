@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation';
 import {data} from '@/static/projectData'
 import WrapperTag from '@/components/WrapperTagg/page'
+import { Link } from '@chakra-ui/react';
 
 const page = () => {   
    const Router = useRouter()
@@ -14,10 +15,10 @@ const page = () => {
          data.map((project,index) => {
             return(
                <div className='flex col-span-1 w-full py-3' key={index}>
-                  <div 
-                     className="card border-1 max-w-[320px] cursor-pointer duration-500 ease-in-out hover:scale-105" 
-                     style={{transformOrigin: index % 3 === 0 ? 'left' : index % 3 === 1 ? 'center' : 'right' }}
-                     onClick={()=>handleClick(project.name as string)}
+                  <Link 
+                     href={`/projectDetail/${project.name}`}
+                     className="card border-1 max-w-[320px] cursor-pointer duration-500 ease-in-out hover:scale-105"
+                     style={{ transformOrigin: index % 3 === 0 ? 'left' : index % 3 === 1 ? 'center' : 'right' }}
                   >
                      <div className="relative">
                         <div className="img-wrapper">
@@ -38,7 +39,7 @@ const page = () => {
                            }
                         </div>
                      </div>
-                  </div>
+                  </Link>
                </div>
             )
          })

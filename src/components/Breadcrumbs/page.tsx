@@ -18,6 +18,13 @@ export default function Breadcrumbs({data, isDetail}: {data:breadcrumbs[], isDet
      });
    }, [spring]);
 
+   // prefetch halaman detail biar cepat
+   useEffect(() => {
+      data.forEach(item => {
+         if (typeof item.goTo === 'string') Router.prefetch(item.goTo);
+      });
+   }, [data, Router]);
+
    const moveTo = (to: any) => {
       if(!isDetail){
          spring.set(window.pageYOffset, false);
@@ -25,9 +32,7 @@ export default function Breadcrumbs({data, isDetail}: {data:breadcrumbs[], isDet
       }else{
          Router.push(`${to}`)
       }
-   //    setTimeout(() => {
-   //  }, 50);
-}
+   }
 
   return (
       <ol className="flex items-center rounded-3xl border border-white backdrop-blur-lg backdrop-filter text-sm text-white">
