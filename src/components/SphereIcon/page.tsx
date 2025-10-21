@@ -17,7 +17,6 @@ const HomeSkillsIcon = ({
 
   return (
     <Svg
-      aria-label='icon-skill'
       ref={ref}
       src={icon}
       position={position}
