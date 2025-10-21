@@ -3,11 +3,12 @@ import { motion, MotionStyle, useScroll, AnimationProps, useTransform } from 'fr
 import useSmooth from '@/hooks/useSmooth'
 import { Canvas } from '@react-three/fiber'
 import { Float, TrackballControls } from '@react-three/drei'
-import SphereExpertise from '@/components/SphereExpertise/page'
 import LenisProvider from '@/libs/react-lenis'
 import { dataSkill } from '@/static/skillData'
+import dynamic from 'next/dynamic'
 
 export default function ExpertiseSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
+   const Spehere = dynamic(() => import('@/components/SphereExpertise/page'), {ssr: false})
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -100,7 +101,8 @@ export default function ExpertiseSection({style, getAttribute}:{style: MotionSty
                            rotationIntensity={5} // XYZ rotation intensity, defaults to 1
                            floatIntensity={1}
                         >
-                           <SphereExpertise/>
+                           {/* <SphereExpertise/> */}
+                           <Spehere/>
                         </Float>
                         <TrackballControls rotateSpeed={5} noPan noZoom />
                      </Canvas>
