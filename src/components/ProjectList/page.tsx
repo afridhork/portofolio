@@ -15,7 +15,8 @@ const page = () => {
          data.map((project,index) => {
             return(
                <div className='flex col-span-1 w-full py-3' key={index}>
-                  <Link 
+                  <Link
+                     aria-label="to-detail"
                      href={`/projectDetail/${project.name}`}
                      className="card border-1 max-w-[320px] cursor-pointer duration-500 ease-in-out hover:scale-105"
                      style={{ transformOrigin: index % 3 === 0 ? 'left' : index % 3 === 1 ? 'center' : 'right' }}

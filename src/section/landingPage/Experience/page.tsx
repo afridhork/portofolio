@@ -82,7 +82,7 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
                      <span className='block text-lg sm:text-2xl lg:text-4xl'>Afridho Rachmadi <br /> Kartawiria</span>
                      <span className='block'>SOFTWARE ENGINEER AND FRONT END DEVELOPER</span>
                      <div className='flex items-center cursor-pointer mb-1'>
-                        <Link href={`https://drive.google.com/file/d/1sEh0Da-JSQbIOjJAtG56PlkCmVRyUAiH/view?usp=drive_link`} target='_blank'><span className='block text-sm '>Resume</span></Link>
+                        <Link aria-label='to-CV' href={`https://drive.google.com/file/d/1sEh0Da-JSQbIOjJAtG56PlkCmVRyUAiH/view?usp=drive_link`} target='_blank'><span className='block text-sm '>Resume</span></Link>
                         <svg fill="#e5e7eb" className='ml-1' height="8" width="8" version="1.1" id="arrow_rightup" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
                            <g>
                               <g>
@@ -108,7 +108,7 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
                      {
                         contact.map((data,index)=>{
                            return(
-                              <Link href={data.url} target='_blank' className='cursor-pointer' key={index}>
+                              <Link aria-label='to-contact' href={data.url} target='_blank' className='cursor-pointer' key={index}>
                                  <img src={data.img} alt="" className={`w-[30px] h-[22px] ${index === 0 ? 'pr-1' : index === contact.length+1 ? 'pl-1' : 'px-1' }`} />
                               </Link>
                            )
@@ -127,7 +127,7 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
                            {
                               contact.map((data,index)=>{
                                  return(
-                                    <Link href={data.url} target='_blank' className='cursor-pointer' key={index}>
+                                    <Link aria-label='to-contact' href={data.url} target='_blank' className='cursor-pointer' key={index}>
                                        <img src={data.img} alt="" className={`w-[30px] h-[22px] ${index === 0 ? 'pr-1' : index === contact.length+1 ? 'pl-1' : 'px-1' }`} />
                                     </Link>
                                  )
