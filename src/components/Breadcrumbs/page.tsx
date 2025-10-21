@@ -46,10 +46,11 @@ export default function Breadcrumbs({data, isDetail}: {data:breadcrumbs[], isDet
                      index != length && (
                         <li className="rtl:rotate-180">
                            <svg
-                           xmlns="http://www.w3.org/2000/svg"
-                           className="h-6 w-6"
-                           viewBox="0 0 20 20"
-                           fill="currentColor"
+                              aria-label='right-sign'
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
                            >
                            <path
                               fillRule="evenodd"

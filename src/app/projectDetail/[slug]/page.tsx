@@ -68,7 +68,7 @@ const page = ({params}: {params: {slug: string}}) => {
             </div>
             <div className='col-span-1'>
               <h4 className='text-center'>Url Link</h4>
-              <a className='flex justify-center items-center pt-2' href={projectData.link} target='_blank'>
+              <a aria-label='to-url-project' className='flex justify-center items-center pt-2' href={projectData.link} target='_blank'>
                 <img src="/assets/link.svg" className='w-[20px] h-[20px]' alt="" />
                 <span className='text-[8px] sm:text-xs text-white'>{projectData.link}</span>
               </a>

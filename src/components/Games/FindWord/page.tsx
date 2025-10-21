@@ -139,7 +139,7 @@ const SearchWordGame: React.FC<SearchWordGameProps> = (props) => {
           )
         )}
         {state.selectedWord.length === state.grid.length && (
-          <button className='check-answer-sorting' onClick={checkWord}>
+          <button aria-label='check-button' className='check-answer-sorting' onClick={checkWord}>
             {
               !state.isAnswer ? (
                 <span>check</span>

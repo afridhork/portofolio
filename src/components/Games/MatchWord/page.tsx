@@ -176,7 +176,7 @@ const WordMatchingGame: React.FC<WordMatchingGameProps> = (props) => {
       </div>
       {Object.values(state.dropWords).length === state.quiz.length && (
         
-        <button className="btn submit-match" onClick={handleSubmission}>
+        <button aria-label='refresh-button' className="btn submit-match" onClick={handleSubmission}>
           {
             state.submitted ? (
               <span>refresh</span>
