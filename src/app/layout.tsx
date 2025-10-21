@@ -6,7 +6,7 @@ import ClientLayout from '@/components/ClientLayout/page'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Home - AfridhoRK Portofolio',
+  title: 'AfridhoRK Portofolio',
   description: 'Portofolio website',
 }
 
