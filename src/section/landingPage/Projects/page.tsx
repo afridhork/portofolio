@@ -8,8 +8,10 @@ import MatchWord from '@/components/Games/MatchWord/page'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import MatchJson from '@/static/matchWordJson.json'
+import { useCheckDevice } from '@/app/store/store'
 
 export default function ProjectsSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
+   const { device } = useCheckDevice()
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
       questionList: [
@@ -57,7 +59,7 @@ export default function ProjectsSection({style, getAttribute}:{style: MotionStyl
          setTimeout(() => {
             const rect = currentRef.current?.getBoundingClientRect();
             if(rect){
-               getAttribute(styleForExperience, rect.top)
+               getAttribute(styleForExperience, device === 'desktop' ? rect.top : rect.top - 100)
             }
          }, 500);
       }

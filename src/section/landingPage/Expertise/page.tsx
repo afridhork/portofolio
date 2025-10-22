@@ -6,8 +6,10 @@ import { Float, TrackballControls } from '@react-three/drei'
 import LenisProvider from '@/libs/react-lenis'
 import { dataSkill } from '@/static/skillData'
 import dynamic from 'next/dynamic'
+import { useCheckDevice } from '@/app/store/store'
 
 export default function ExpertiseSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
+   const { device } = useCheckDevice()
    const Spehere = dynamic(() => import('@/components/SphereExpertise/page'), {ssr: false})
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
@@ -31,7 +33,7 @@ export default function ExpertiseSection({style, getAttribute}:{style: MotionSty
          setTimeout(() => {
             const rect = currentRef.current?.getBoundingClientRect();
             if(rect){
-               getAttribute(styleForWork, rect.top)
+               getAttribute(styleForWork, device === 'desktop' ? rect.top : rect.top - 100)
             }
          }, 500);
       }
