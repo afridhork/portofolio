@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   description: 'Portofolio website',
 }
 
-const { device } = userAgent({ headers: headers() });
-const deviceType = device?.type === "mobile" ? "mobile" : "desktop"
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const { device } = userAgent({ headers: headers() });
+  const deviceType = device?.type === "mobile" ? "mobile" : "desktop"
+  
   return (
     <html lang="en">
       <body className={inter.className}>
