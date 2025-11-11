@@ -9,14 +9,11 @@ import { AccordionIcon } from '@chakra-ui/react'
 import { AccordionPanel } from '@chakra-ui/react'
 import LenisProvider from '@/libs/react-lenis'
 import Link from 'next/link'
-
-// import GitHub from '/assets/Github.svg'
-// import Gmail from '/assets/Gmail.svg'
-// import LinkedIn from '/assets/Gmail.svg'
-// import Instagram from '/assets/Gmail.svg'
+import { useCheckDevice } from '@/app/store/store'
 
 
-const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any)=>void}) => {
+const Experience = ({getAttribute}:{getAttribute: (value:any)=>void}) => {
+   const { device } = useCheckDevice()
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -27,34 +24,28 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
    
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      offset: ['0', '1']
+      // offset: ['0', '1']
+      offset: ['0 1', '1 0.1']
    })
 
-   const style1: MotionStyle = {
-      rotateX: useSmooth(scrollYProgress, [0, 0.2], [2, 0]),
-      scale: useSmooth(scrollYProgress, [0, 0.2], [0.9, 1])
+   const animationStyle: MotionStyle = {
+      // rotateX: useSmooth(scrollYProgress, [0, 1], [2, 0]),
+      // scale: useSmooth(scrollYProgress, [0, 1], [0.8, 1])
+      rotateX: useSmooth(scrollYProgress, [0, 0.5], [2, 0]),
+      scale: useSmooth(scrollYProgress, [0, 0.5], [0.8, 1])
    }
 
    useEffect(() => {
       if(currentRef.current){
-         getAttribute(currentRef.current?.offsetTop)
+         setTimeout(() => {
+            const rect = currentRef.current?.getBoundingClientRect();
+            if(rect){
+               getAttribute(device === 'desktop' ? rect.top : rect.top - 100)
+            }
+         }, 500);
       }
    }, [])
-
-   const initial: AnimationProps['initial'] = { opacity: 0 }
-   const animate: AnimationProps['animate'] = {
-      opacity: 1,
-      transition: {
-         ease: 'easeInOut'
-      }
-   }
-   const exit: AnimationProps['exit'] = {
-      opacity: 0,
-      transition: {
-         ease: 'easeIn',
-         duration: 0.2
-      }
-   }
+   
    const contact = [
       {socialMedia: 'GitHub', img:'/assets/Github.svg', url: 'https://github.com/afridhork'},
       {socialMedia: 'Instagram', img:'/assets/Instagram.svg', url: 'https://www.instagram.com/pidorkartawiria/'},
@@ -70,7 +61,7 @@ const Experience = ({style, getAttribute}:{style: MotionStyle, getAttribute: (va
          <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
-            style={style}
+            style={animationStyle}
             // ref={currentRef}
             className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter mb-20 p-10`}
             data-testid="terminal"

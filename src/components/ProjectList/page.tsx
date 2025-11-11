@@ -4,11 +4,7 @@ import {data} from '@/static/projectData'
 import WrapperTag from '@/components/WrapperTagg/page'
 import { Link } from '@chakra-ui/react';
 
-const page = () => {   
-   const Router = useRouter()
-   const handleClick = (name: string) => {
-      Router.push(`/projectDetail/${name}`)
-   }
+const page = () => {  
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6'>
       {

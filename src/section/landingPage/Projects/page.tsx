@@ -10,7 +10,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import MatchJson from '@/static/matchWordJson.json'
 import { useCheckDevice } from '@/app/store/store'
 
-export default function ProjectsSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
+export default function ProjectsSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
    const { device } = useCheckDevice()
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
@@ -45,41 +45,25 @@ export default function ProjectsSection({style, getAttribute}:{style: MotionStyl
    
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      offset: ['0', '1']
+      // offset: ['0', '1']
+      offset: ['0 1', '1 0.1']
    })
 
-   const styleForExperience: MotionStyle = {
-      rotateX: useSmooth(scrollYProgress, [0, 1], [2, 0]),
-      scale: useSmooth(scrollYProgress, [0, 1], [0.8, 1])
+   const animationStyle: MotionStyle = {
+      rotateX: useSmooth(scrollYProgress, [0, 0.5], [2, 0]),
+      scale: useSmooth(scrollYProgress, [0, 0.5], [0.8, 1])
    }
 
    useEffect(() => {
       if(currentRef.current){
-         // getAttribute(styleForExperience, currentRef.current?.offsetTop)
          setTimeout(() => {
             const rect = currentRef.current?.getBoundingClientRect();
             if(rect){
-               getAttribute(styleForExperience, device === 'desktop' ? rect.top : rect.top - 100)
+               getAttribute(device === 'desktop' ? rect.top : rect.top - 100)
             }
          }, 500);
       }
    }, [])
-
-   const initial: AnimationProps['initial'] = { opacity: 0 }
-   const animate: AnimationProps['animate'] = {
-      opacity: 1,
-      transition: {
-         ease: 'easeInOut'
-      }
-   }
-   const exit: AnimationProps['exit'] = {
-      opacity: 0,
-      transition: {
-         ease: 'easeIn',
-         duration: 0.2
-      }
-   }
-
 
   return (
    <section className='relative pt-20' ref={currentRef}>
@@ -87,8 +71,7 @@ export default function ProjectsSection({style, getAttribute}:{style: MotionStyl
          <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
-            style={style}
-            // ref={currentRef}
+            style={animationStyle}
             className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8`}
             data-testid="terminal"
          >

@@ -8,7 +8,7 @@ import { dataSkill } from '@/static/skillData'
 import dynamic from 'next/dynamic'
 import { useCheckDevice } from '@/app/store/store'
 
-export default function ExpertiseSection({style, getAttribute}:{style: MotionStyle, getAttribute: (value:any, pos: number)=>void}) {
+export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
    const { device } = useCheckDevice()
    const Spehere = dynamic(() => import('@/components/SphereExpertise/page'), {ssr: false})
    const currentRef = useRef<HTMLDivElement>(null)
@@ -21,19 +21,21 @@ export default function ExpertiseSection({style, getAttribute}:{style: MotionSty
    
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      offset: ['0', '1']
+      // offset: ['0', '1']
+      offset: ['0 1', '1 0.1']
    })
 
-   const styleForWork: MotionStyle = {
-      rotateX: useSmooth(scrollYProgress, [0, 1], [2, 0]),
-      scale: useSmooth(scrollYProgress, [0, 1], [0.8, 1])
+   const animationStyle: MotionStyle = {
+      rotateX: useSmooth(scrollYProgress, [0, 0.5], [2, 0]),
+      scale: useSmooth(scrollYProgress, [0, 0.5], [0.8, 1])
    }
+
    useEffect(() => {
       if(currentRef.current){
          setTimeout(() => {
             const rect = currentRef.current?.getBoundingClientRect();
             if(rect){
-               getAttribute(styleForWork, device === 'desktop' ? rect.top : rect.top - 100)
+               getAttribute(device === 'desktop' ? rect.top : rect.top - 100)
             }
          }, 500);
       }
@@ -54,10 +56,6 @@ export default function ExpertiseSection({style, getAttribute}:{style: MotionSty
          duration: 0.2
       }
    }
-
-   const listScroll: MotionStyle = {
-      opacity: useTransform(scrollYProgress, [0.6, 1], [0, 1])
-   }
    
    const data = [...dataSkill]
 
@@ -70,7 +68,7 @@ export default function ExpertiseSection({style, getAttribute}:{style: MotionSty
          <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
-            style={style}
+            style={animationStyle}
             // ref={currentRef}
             className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-10`}
             data-testid="terminal"
