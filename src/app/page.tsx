@@ -1,5 +1,5 @@
 'use client'
-import Breadcrumbs from '@/components/Breadcrumbs/page'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import HomeSection from '../section/landingPage/Home/page'
 import ExpertiseSection from '../section/landingPage/Expertise/page'
 import ProjectsSection from '../section/landingPage/Projects/page'
