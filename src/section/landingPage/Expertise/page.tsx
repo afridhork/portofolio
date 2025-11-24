@@ -1,16 +1,16 @@
 import React, { RefObject, Suspense, useEffect, useRef } from 'react'
 import { motion, MotionStyle, useScroll, AnimationProps, useTransform } from 'framer-motion'
-import useSmooth from '@/hooks/useSmooth'
+import useSmooth from '../../../hooks/useSmooth'
 import { Canvas } from '@react-three/fiber'
 import { Float, TrackballControls } from '@react-three/drei'
-import LenisProvider from '@/libs/react-lenis'
-import { dataSkill } from '@/static/skillData'
+import LenisProvider from '../../../libs/react-lenis'
+import { dataSkill } from '../../../static/skillData'
 import dynamic from 'next/dynamic'
-import { useCheckDevice } from '@/app/store/store'
+import { useCheckDevice } from '../../../app/store/store'
 
 export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
    const { device } = useCheckDevice()
-   const Spehere = dynamic(() => import('@/components/SphereExpertise/page'), {ssr: false})
+   const Spehere = dynamic(() => import('../../../components/SphereExpertise/page'), {ssr: false})
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',

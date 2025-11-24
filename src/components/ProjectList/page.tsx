@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
-import {data} from '@/static/projectData'
-import WrapperTag from '@/components/WrapperTagg/page'
+import {data} from '../../static/projectData'
+import WrapperTag from '../../components/WrapperTagg/page'
 import { Link } from '@chakra-ui/react';
 
 const page = () => {  

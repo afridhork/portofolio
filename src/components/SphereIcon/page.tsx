@@ -1,4 +1,4 @@
-import {HomeSkillsIconProps} from '@/types/sphere'
+import {HomeSkillsIconProps} from '../../types/sphere'
 import { Svg, type SvgProps } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'

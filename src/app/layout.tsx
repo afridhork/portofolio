@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ClientLayout from '@/components/ClientLayout/page'
+import ClientLayout from '../components/ClientLayout/page'
 import { userAgent } from "next/server";
 import { headers } from "next/headers";
 

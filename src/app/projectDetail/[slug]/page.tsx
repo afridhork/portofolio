@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Breadcrumbs from '@/components/Breadcrumbs'
-import {data} from '@/static/projectData'
-import {projectData} from '@/types/projectData'
-import ImageSlider from '@/components/chakraCarousel'
+import Breadcrumbs from '../../../components/Breadcrumbs'
+import {data} from '../../../static/projectData'
+import {projectData} from '../../../types/projectData'
+import ImageSlider from '../../../components/chakraCarousel'
 
 const page = ({params}: {params: {slug: string}}) => {
   const dataBreadcrumbs: string[] = ['Main', 'Project Detail', `${params.slug.replace(/%20/g, " ")}`]

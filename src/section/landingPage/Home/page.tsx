@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
-import ArrowAnimation from '@/components/ArrowAnimation/page'
+import ArrowAnimation from '../../../components/ArrowAnimation/page'
 import { 
   motion,
   useScroll,
   type MotionStyle
 } from 'framer-motion';
-import useSmooth from '@/hooks/useSmooth'
+import useSmooth from '../../../hooks/useSmooth'
 
 export default function HomeSection({getAttribute}: {getAttribute: (value:any)=> void}) {
   const currentRef = useRef<HTMLDivElement>(null)

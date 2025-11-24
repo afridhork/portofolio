@@ -1,12 +1,12 @@
 'use client'
 
-import LenisProvider from '@/libs/react-lenis'
+import LenisProvider from '../../libs/react-lenis'
 import dynamic from 'next/dynamic'
-import { Providers } from '@/app/providers'
+import { Providers } from '../../app/providers'
 import { useEffect, useState } from 'react'
-import { useCheckDevice } from '@/app/store/store'
+import { useCheckDevice } from '../../app/store/store'
 
-const Particles = dynamic(() => import('@/components/TsParticles/page'))
+const Particles = dynamic(() => import('../../components/TsParticles/page'))
 
 export default function ClientLayout({ children, device }: { children: React.ReactNode, device: string }) {
   const [isRendered, setIsRendered] = useState(false)

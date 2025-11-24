@@ -1,15 +1,15 @@
 import React, { Suspense, useEffect, useRef } from 'react'
 import { AnimationProps, MotionStyle, motion, useScroll, useTransform } from 'framer-motion'
-import useSmooth from '@/hooks/useSmooth'
+import useSmooth from '../../../hooks/useSmooth'
 import { Accordion } from '@chakra-ui/react'
 import { AccordionItem } from '@chakra-ui/react'
 import { AccordionButton } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { AccordionIcon } from '@chakra-ui/react'
 import { AccordionPanel } from '@chakra-ui/react'
-import LenisProvider from '@/libs/react-lenis'
+import LenisProvider from '../../../libs/react-lenis'
 import Link from 'next/link'
-import { useCheckDevice } from '@/app/store/store'
+import { useCheckDevice } from '../../../app/store/store'
 
 
 const Experience = ({getAttribute}:{getAttribute: (value:any)=>void}) => {
