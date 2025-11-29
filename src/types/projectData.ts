@@ -1,14 +1,15 @@
+import { StaticImageData } from "next/image"
 export interface projectData {
-   [key: number]: any,
-   name: string,
-   techStack: string[],
-   category: string,
-   content: string,
-   link: string,
-   thumbnail: string,
-   images: image[]
+  name: string
+  techStack: string[]
+  category: string
+  content: string
+  link: string
+  thumbnail: string | StaticImageData
+  images: ImageItem[]
 }
 
-export interface image{
-   image:string
+
+export interface ImageItem {
+  image: StaticImageData
 }

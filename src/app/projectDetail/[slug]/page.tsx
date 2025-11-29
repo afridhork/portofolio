@@ -6,11 +6,12 @@ import {projectData} from '../../../types/projectData'
 import ImageSlider from '../../../components/chakraCarousel'
 
 const page = ({params}: {params: {slug: string}}) => {
-  const dataBreadcrumbs: string[] = ['Main', 'Project Detail', `${params.slug.replace(/%20/g, " ")}`]
-  const [breadcrumbs, setBreadcrumbs] = useState([
+  // const dataBreadcrumbs: string[] = ['Main', 'Project Detail', `${params.slug.replace(/%20/g, " ")}`]
+  const breadcrumbs = [
     {goTo: '/', name: 'Main'},
     {goTo: `/projectDetail/${params.slug.replace(/%20/g, " ")}`, name: `${params.slug.replace(/%20/g, " ")}`},
-  ])
+  ]
+  
   const [projectData, setProjectData] = useState<projectData>({
     name: '',
     techStack:[],
@@ -18,7 +19,7 @@ const page = ({params}: {params: {slug: string}}) => {
     content:"",
     link:'',
     thumbnail: '',
-    images:[{image:''}]
+    images:[]
   })
   
   useEffect(() => {
@@ -29,13 +30,6 @@ const page = ({params}: {params: {slug: string}}) => {
       }
     }
   }, [])
-
-  const transition = {
-    type: 'spring',
-    stiffness: 300,
-    damping: 50,
-    restDelta: 0.001
- }
   
   return (
     <div>

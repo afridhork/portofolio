@@ -1,50 +1,51 @@
 // Use string paths for images instead of imports to avoid build errors with placeholder files
-const sc_image = '/assets/shopcart/sc-landindPage.png'
-const st_image = '/assets/staycation/st-landindPage.png'
-const st_admin = '/assets/staycation/st-admin.png'
-const dc_image = '/assets/deacourse/dc-landingPage.png'
-const pt_image = '/assets/porto/pt-landingPage.png'
-const lpk_image = '/assets/lpk/lpk-landingPage.png'
+// import sc_image from '../../assets/shopcart/sc-landindPage.png'
+import sc_image from '../assets/shopcart/sc-landindPage.png'
+import st_image from '../assets/staycation/st-landindPage.png'
+import st_admin from '../assets/staycation/st-admin.png'
+import dc_image from '../assets/deacourse/dc-landingPage.png'
+import pt_image from '../assets/porto/pt-landingPage.png'
+import lpk_image from '../assets/lpk/lpk-landingPage.png'
 
 //afridhork
-const pt_lp = '/assets/porto/pt-landingPage.png'
-const pt_sp = '/assets/porto/pt-skillPage.png'
-const pt_dp = '/assets/porto/pt-detailPage.png'
+import pt_lp from '../assets/porto/pt-landingPage.png'
+import pt_sp from '../assets/porto/pt-skillPage.png'
+import pt_dp from '../assets/porto/pt-detailPage.png'
 
 // shopCart
-const sc_lp = '/assets/shopcart/data/sc-landindPage-lg.png'
-const sc_ctg = '/assets/shopcart/data/sc-category.png'
-const sc_dtl = '/assets/shopcart/data/sc-detail.png'
-const sc_co = '/assets/shopcart/data/sc-checkout.png'
-const sc_cart = '/assets/shopcart/data/sc-cart.png'
+import sc_lp from '../assets/shopcart/data/sc-landindPage-lg.png'
+import sc_ctg from '../assets/shopcart/data/sc-category.png'
+import sc_dtl from '../assets/shopcart/data/sc-detail.png'
+import sc_co from '../assets/shopcart/data/sc-checkout.png'
+import sc_cart from '../assets/shopcart/data/sc-cart.png'
 
 // staycation
-const st_lp = '/assets/staycation/dataLP/st-landingPage-lg.png'
-const st_mp = '/assets/staycation/dataLP/st-mostPicked.png'
-const st_dtl = '/assets/staycation/dataLP/st-detail.png'
-const st_bi = '/assets/staycation/dataLP/st-bookInfo.png'
+import st_lp from '../assets/staycation/dataLP/st-landingPage-lg.png'
+import st_mp from '../assets/staycation/dataLP/st-payment.png'
+import st_dtl from '../assets/staycation/dataLP/st-detail.png'
+import st_bi from '../assets/staycation/dataLP/st-bookInfo.png'
 
 // admin stay
-const admst_lp = '/assets/staycation/dataAdmin/st-admin-lgt.png'
-const admst_db = '/assets/staycation/dataAdmin/st-dashboard.png'
-const admst_bnk = '/assets/staycation/dataAdmin/st-bank.png'
-const admst_bkg = '/assets/staycation/dataAdmin/st-booking.png'
-const admst_ctg = '/assets/staycation/dataAdmin/st-category.png'
-const admst_itm = '/assets/staycation/dataAdmin/st-item.png'
+import admst_lp from '../assets/staycation/dataAdmin/st-admin-lgt.png'
+import admst_db from '../assets/staycation/dataAdmin/st-dashboard.png'
+import admst_bnk from '../assets/staycation/dataAdmin/st-bank.png'
+import admst_bkg from '../assets/staycation/dataAdmin/st-booking.png'
+import admst_ctg from '../assets/staycation/dataAdmin/st-category.png'
+import admst_itm from '../assets/staycation/dataAdmin/st-item.png'
 
 // shoplist
-const dc_lp = '/assets/deacourse/data/dc-landingPage-lg.png'
+import dc_lp from '../assets/deacourse/data/dc-landingPage-lg.png'
 
 // rumah lpk
-const lpk_lp = '/assets/lpk/lpk-landingPage-lg.png'
-const lpk_login = '/assets/lpk/lpk-login.png'
-const lpk_reg = '/assets/lpk/lpk-register.png'
-const lpk_fp = '/assets/lpk/lpk-forgot-pass.png'
-const lpk_db = '/assets/lpk/lpk-dashboard.png'
-const lpk_ins = '/assets/lpk/lpk-instructor.png'
-const lpk_cl = '/assets/lpk/lpk-courseList.png'
-const lpk_ca = '/assets/lpk/lpk-config-account.png'
-const lpk_acc = '/assets/lpk/lpk-addCourseContent.png'
+import lpk_lp from '../assets/lpk/lpk-landingPage-lg.png'
+import lpk_login from '../assets/lpk/lpk-login.png'
+import lpk_reg from '../assets/lpk/lpk-register.png'
+import lpk_fp from '../assets/lpk/lpk-forgot-pass.png'
+import lpk_db from '../assets/lpk/lpk-dashboard.png'
+import lpk_ins from '../assets/lpk/lpk-instructor.png'
+import lpk_cl from '../assets/lpk/lpk-courseList.png'
+import lpk_ca from '../assets/lpk/lpk-config-account.png'
+import lpk_acc from '../assets/lpk/lpk-addCourseContent.png'
 
 
 export const data = [

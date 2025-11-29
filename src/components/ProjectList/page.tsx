@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import {data} from '../../static/projectData'
 import WrapperTag from '../../components/WrapperTagg/page'
 import { Link } from '@chakra-ui/react';
+import Image from 'next/image';
 
 const page = () => {  
   return (
@@ -19,7 +20,7 @@ const page = () => {
                   >
                      <div className="relative">
                         <div className="img-wrapper">
-                           <img src={project.thumbnail} className='w-full' alt="" />
+                           <Image src={project.thumbnail} className='w-full' alt="" />
                         </div>
                      </div>
                      <div className="meta-wrapper overflow-hidden p-2 w-full">
