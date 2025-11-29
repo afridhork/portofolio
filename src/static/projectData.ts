@@ -37,7 +37,7 @@ import admst_itm from '../assets/staycation/dataAdmin/st-item.png'
 import dc_lp from '../assets/deacourse/data/dc-landingPage-lg.png'
 
 // rumah lpk
-import lpk_lp from '../assets/lpk/lpk-landingPage-lg.png'
+import lpk_lp from '../assets/lpk/lpk-landingPage.png'
 import lpk_login from '../assets/lpk/lpk-login.png'
 import lpk_reg from '../assets/lpk/lpk-register.png'
 import lpk_fp from '../assets/lpk/lpk-forgot-pass.png'
