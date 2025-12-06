@@ -1,22 +1,20 @@
 import React from 'react'
+import { useRouter } from 'next/navigation';
 import {data} from '../../static/projectData'
 import WrapperTag from '../../components/WrapperTagg/page'
-import { projectData } from '../../types/projectData'
+import { Link } from '@chakra-ui/react';
 import Image from 'next/image';
 
-interface ProjectListProps {
-  onProjectClick?: (project: projectData) => void;
-}
-
-const page = ({ onProjectClick }: ProjectListProps) => {
+const page = () => {
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6'>
       {
          data.map((project,index) => {
             return(
                <div className='flex col-span-1 w-full py-3' key={index}>
-                  <div
-                     onClick={() => onProjectClick?.(project)}
+                  <Link
+                     aria-label="to-detail"
+                     href={`/projectDetail/${project.name}`}
                      className="card border-1 max-w-[320px] cursor-pointer duration-500 ease-in-out hover:scale-105"
                      style={{ transformOrigin: index % 3 === 0 ? 'left' : index % 3 === 1 ? 'center' : 'right' }}
                   >
@@ -39,7 +37,7 @@ const page = ({ onProjectClick }: ProjectListProps) => {
                            }
                         </div>
                      </div>
-                  </div>
+                  </Link>
                </div>
             )
          })
