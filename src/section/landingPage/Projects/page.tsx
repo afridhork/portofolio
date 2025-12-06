@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState} from 'react'
-import { motion, MotionStyle, useScroll, AnimationProps } from 'framer-motion'
+import { motion, MotionStyle, useScroll, AnimationProps, AnimatePresence } from 'framer-motion'
 import useSmooth from '../../../hooks/useSmooth'
 import LenisProvider from '../../../libs/react-lenis'
 import ProjectList from '../../../components/ProjectList/page'
+import ProjectDetail from '../../../components/ProjectDetail'
 import FindWord from '../../../components/Games/FindWord/page'
 import MatchWord from '../../../components/Games/MatchWord/page'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { projectData } from '../../../types/projectData'
 
 import MatchJson from '../../../static/matchWordJson.json'
 import { useCheckDevice } from '../../../app/store/store'
 
 export default function ProjectsSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
    const { device } = useCheckDevice()
+   const [selectedProject, setSelectedProject] = useState<projectData | null>(null)
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
       questionList: [
@@ -70,9 +73,14 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
       <div className='flex justify-center' style={{ perspective: '10rem' }}>
          <motion.div
             initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
+            animate={{
+               opacity: 1,
+               y: 0,
+               x: selectedProject ? '-50%' : 0,
+               transition: { ...transition, delay: 0.4 }
+            }}
             style={animationStyle}
-            className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8`}
+            className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8 relative`}
             data-testid="terminal"
          >
             <span className='flex justify-center items-center text-white text-4xl'>My Projects</span>
@@ -82,10 +90,10 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                   <Tab>Mini Games</Tab>
                </TabList>
 
-               <TabPanels className="h-full relative overflow-hidden  pb-8">
+               <TabPanels className="h-full relative overflow-hidden pb-8">
                   <TabPanel className="h-full">
                      <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
-                        <ProjectList/>
+                        <ProjectList onProjectClick={setSelectedProject} />
                      </LenisProvider>
                   </TabPanel>
                   <TabPanel className="h-full">
@@ -102,7 +110,15 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                   </TabPanel>
                </TabPanels>
             </Tabs>
-                     
+
+            <AnimatePresence>
+               {selectedProject && (
+                  <ProjectDetail
+                     project={selectedProject}
+                     onClose={() => setSelectedProject(null)}
+                  />
+               )}
+            </AnimatePresence>
          </motion.div>
       </div>
    </section>
