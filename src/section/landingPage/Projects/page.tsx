@@ -76,76 +76,79 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
    }
 
   return (
-   <section className='relative pt-20' ref={currentRef}>
-      <div className='flex justify-center' style={{ perspective: '10rem' }}>
-         <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
-            style={animationStyle}
-            className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8`}
-            data-testid="terminal"
-         >
-            <span className='flex justify-center items-center text-white text-4xl'>My Projects</span>
-            <Tabs className="grid relative h-[26rem] w-full overflow-hidden ">
-               <TabList>
-                  <Tab>Project's</Tab>
-                  <Tab>Mini Games</Tab>
-               </TabList>
+   <div className='relative'>
+      <motion.section
+         className='relative pt-20'
+         ref={currentRef}
+         animate={{ x: selectedProject ? '-100%' : 0 }}
+         transition={{
+            type: 'tween',
+            duration: 0.5,
+            ease: 'easeInOut'
+         }}
+      >
+         <div className='flex justify-center' style={{ perspective: '10rem' }}>
+            <motion.div
+               initial={{ opacity: 0, y: 100 }}
+               animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
+               style={animationStyle}
+               className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8`}
+               data-testid="terminal"
+            >
+               <span className='flex justify-center items-center text-white text-4xl'>My Projects</span>
+               <Tabs className="grid relative h-[26rem] w-full overflow-hidden ">
+                  <TabList>
+                     <Tab>Project's</Tab>
+                     <Tab>Mini Games</Tab>
+                  </TabList>
 
-               <TabPanels className="h-full relative overflow-hidden pb-8">
-                  <TabPanel className="h-full relative overflow-hidden">
-                     <motion.div
-                        animate={{ x: selectedProject ? '-100%' : 0 }}
-                        transition={{
-                           type: 'tween',
-                           duration: 0.4,
-                           ease: 'easeOut'
-                        }}
-                        className='absolute inset-0 w-full h-full'
-                     >
+                  <TabPanels className="h-full relative overflow-hidden pb-8">
+                     <TabPanel className="h-full relative overflow-hidden">
                         <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
                            <ProjectList onProjectClick={handleProjectClick}/>
                         </LenisProvider>
-                     </motion.div>
-
-                     <AnimatePresence>
-                        {selectedProject && (
-                           <motion.div
-                              initial={{ x: '100%' }}
-                              animate={{ x: 0 }}
-                              exit={{ x: '100%' }}
-                              transition={{
-                                 type: 'tween',
-                                 duration: 0.4,
-                                 ease: 'easeOut'
-                              }}
-                              className='absolute inset-0 w-full h-full px-4 bg-[#0a0a0a]'
-                           >
-                              <ProjectDetail
-                                 project={selectedProject}
-                                 onClose={handleCloseDetail}
-                              />
-                           </motion.div>
-                        )}
-                     </AnimatePresence>
-                  </TabPanel>
-                  <TabPanel className="h-full">
-                     <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
-                        <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-x-2'>
-                           <div className='col-span-1 border border-white h-[85%]'>
-                              <FindWord question='question' answer='answer' />
+                     </TabPanel>
+                     <TabPanel className="h-full">
+                        <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
+                           <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-x-2'>
+                              <div className='col-span-1 border border-white h-[85%]'>
+                                 <FindWord question='question' answer='answer' />
+                              </div>
+                              <div className='hidden sm:block relative col-span-1 border border-white h-[85%]'>
+                                 <MatchWord question={matchWordData.questionList} answer={matchWordData.answerList} />
+                              </div>
                            </div>
-                           <div className='hidden sm:block relative col-span-1 border border-white h-[85%]'>
-                              <MatchWord question={matchWordData.questionList} answer={matchWordData.answerList} />
-                           </div>
-                        </div>
-                     </LenisProvider>
-                  </TabPanel>
-               </TabPanels>
-            </Tabs>
+                        </LenisProvider>
+                     </TabPanel>
+                  </TabPanels>
+               </Tabs>
 
-         </motion.div>
-      </div>
-   </section>
+            </motion.div>
+         </div>
+      </motion.section>
+
+      <AnimatePresence>
+         {selectedProject && (
+            <motion.div
+               initial={{ x: '100%' }}
+               animate={{ x: 0 }}
+               exit={{ x: '100%' }}
+               transition={{
+                  type: 'tween',
+                  duration: 0.5,
+                  ease: 'easeInOut'
+               }}
+               className='fixed inset-0 z-50 bg-[#0a0a0a] overflow-hidden'
+            >
+               <div className='h-full overflow-y-auto px-8 pt-20'>
+                  <ProjectDetail
+                     project={selectedProject}
+                     onClose={handleCloseDetail}
+                  />
+               </div>
+            </motion.div>
+         )}
+      </AnimatePresence>
+   </div>
   )
 }
