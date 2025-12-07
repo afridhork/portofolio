@@ -94,27 +94,23 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
 
                <TabPanels className="h-full relative overflow-hidden pb-8">
                   <TabPanel className="h-full relative overflow-hidden">
-                     <AnimatePresence mode='wait'>
-                        {!selectedProject ? (
+                     <motion.div
+                        animate={{ x: selectedProject ? '-100%' : 0 }}
+                        transition={{
+                           type: 'tween',
+                           duration: 0.4,
+                           ease: 'easeOut'
+                        }}
+                        className='absolute inset-0 w-full h-full'
+                     >
+                        <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
+                           <ProjectList onProjectClick={handleProjectClick}/>
+                        </LenisProvider>
+                     </motion.div>
+
+                     <AnimatePresence>
+                        {selectedProject && (
                            <motion.div
-                              key="project-list"
-                              initial={{ x: 0 }}
-                              animate={{ x: 0 }}
-                              exit={{ x: '-100%' }}
-                              transition={{
-                                 type: 'tween',
-                                 duration: 0.4,
-                                 ease: 'easeOut'
-                              }}
-                              className='absolute inset-0 w-full h-full'
-                           >
-                              <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
-                                 <ProjectList onProjectClick={handleProjectClick}/>
-                              </LenisProvider>
-                           </motion.div>
-                        ) : (
-                           <motion.div
-                              key="project-detail"
                               initial={{ x: '100%' }}
                               animate={{ x: 0 }}
                               exit={{ x: '100%' }}
@@ -123,7 +119,7 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                                  duration: 0.4,
                                  ease: 'easeOut'
                               }}
-                              className='absolute inset-0 w-full h-full px-4'
+                              className='absolute inset-0 w-full h-full px-4 bg-[#0a0a0a]'
                            >
                               <ProjectDetail
                                  project={selectedProject}
