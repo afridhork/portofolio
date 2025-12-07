@@ -107,6 +107,27 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                         <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
                            <ProjectList onProjectClick={handleProjectClick}/>
                         </LenisProvider>
+
+                        <AnimatePresence>
+                           {selectedProject && (
+                              <motion.div
+                                 initial={{ x: '100%' }}
+                                 animate={{ x: 0 }}
+                                 exit={{ x: '100%' }}
+                                 transition={{
+                                    type: 'tween',
+                                    duration: 0.5,
+                                    ease: 'easeInOut'
+                                 }}
+                                 className='absolute inset-0 w-full h-full px-4 bg-[#0a0a0a]'
+                              >
+                                 <ProjectDetail
+                                    project={selectedProject}
+                                    onClose={handleCloseDetail}
+                                 />
+                              </motion.div>
+                           )}
+                        </AnimatePresence>
                      </TabPanel>
                      <TabPanel className="h-full">
                         <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
@@ -126,29 +147,6 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
             </motion.div>
          </div>
       </motion.section>
-
-      <AnimatePresence>
-         {selectedProject && (
-            <motion.div
-               initial={{ x: '100%' }}
-               animate={{ x: 0 }}
-               exit={{ x: '100%' }}
-               transition={{
-                  type: 'tween',
-                  duration: 0.5,
-                  ease: 'easeInOut'
-               }}
-               className='fixed inset-0 z-50 bg-[#0a0a0a] overflow-hidden'
-            >
-               <div className='h-full overflow-y-auto px-8 pt-20'>
-                  <ProjectDetail
-                     project={selectedProject}
-                     onClose={handleCloseDetail}
-                  />
-               </div>
-            </motion.div>
-         )}
-      </AnimatePresence>
    </div>
   )
 }
