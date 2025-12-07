@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState} from 'react'
-import { motion, MotionStyle, useScroll, AnimationProps } from 'framer-motion'
+import { motion, MotionStyle, useScroll, AnimatePresence } from 'framer-motion'
 import useSmooth from '../../../hooks/useSmooth'
 import LenisProvider from '../../../libs/react-lenis'
 import ProjectList from '../../../components/ProjectList/page'
+import ProjectDetail from '../../../components/ProjectDetail/page'
 import FindWord from '../../../components/Games/FindWord/page'
 import MatchWord from '../../../components/Games/MatchWord/page'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { projectData } from '../../../types/projectData'
 
 import MatchJson from '../../../static/matchWordJson.json'
 import { useCheckDevice } from '../../../app/store/store'
 
 export default function ProjectsSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
    const { device } = useCheckDevice()
+   const [selectedProject, setSelectedProject] = useState<projectData | null>(null)
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
       questionList: [
@@ -34,7 +37,7 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
       const data = {...MatchJson}
       setMatchWordData(data)
    }, [])
-   
+
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -42,10 +45,9 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
       damping: 50,
       restDelta: 0.001
    }
-   
+
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      // offset: ['0', '1']
       offset: ['0 1', '1 0.1']
    })
 
@@ -65,6 +67,14 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
       }
    }, [])
 
+   const handleProjectClick = (project: projectData) => {
+      setSelectedProject(project)
+   }
+
+   const handleCloseDetail = () => {
+      setSelectedProject(null)
+   }
+
   return (
    <section className='relative pt-20' ref={currentRef}>
       <div className='flex justify-center' style={{ perspective: '10rem' }}>
@@ -82,11 +92,48 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                   <Tab>Mini Games</Tab>
                </TabList>
 
-               <TabPanels className="h-full relative overflow-hidden  pb-8">
+               <TabPanels className="h-full relative overflow-hidden pb-8">
                   <TabPanel className="h-full">
-                     <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
-                        <ProjectList/>
-                     </LenisProvider>
+                     <div className='relative h-full overflow-hidden'>
+                        <AnimatePresence mode='wait'>
+                           {!selectedProject ? (
+                              <motion.div
+                                 key="project-list"
+                                 initial={{ x: 0, opacity: 1 }}
+                                 animate={{ x: 0, opacity: 1 }}
+                                 exit={{ x: '-100%', opacity: 0 }}
+                                 transition={{
+                                    type: 'spring',
+                                    stiffness: 300,
+                                    damping: 30
+                                 }}
+                                 className='absolute inset-0'
+                              >
+                                 <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
+                                    <ProjectList onProjectClick={handleProjectClick}/>
+                                 </LenisProvider>
+                              </motion.div>
+                           ) : (
+                              <motion.div
+                                 key="project-detail"
+                                 initial={{ x: '100%', opacity: 0 }}
+                                 animate={{ x: 0, opacity: 1 }}
+                                 exit={{ x: '100%', opacity: 0 }}
+                                 transition={{
+                                    type: 'spring',
+                                    stiffness: 300,
+                                    damping: 30
+                                 }}
+                                 className='absolute inset-0 px-4'
+                              >
+                                 <ProjectDetail
+                                    project={selectedProject}
+                                    onClose={handleCloseDetail}
+                                 />
+                              </motion.div>
+                           )}
+                        </AnimatePresence>
+                     </div>
                   </TabPanel>
                   <TabPanel className="h-full">
                      <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
@@ -102,7 +149,7 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                   </TabPanel>
                </TabPanels>
             </Tabs>
-                     
+
          </motion.div>
       </div>
    </section>
