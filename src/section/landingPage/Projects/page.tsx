@@ -93,47 +93,45 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                </TabList>
 
                <TabPanels className="h-full relative overflow-hidden pb-8">
-                  <TabPanel className="h-full">
-                     <div className='relative h-full overflow-hidden'>
-                        <AnimatePresence mode='wait'>
-                           {!selectedProject ? (
-                              <motion.div
-                                 key="project-list"
-                                 initial={{ x: 0, opacity: 1 }}
-                                 animate={{ x: 0, opacity: 1 }}
-                                 exit={{ x: '-100%', opacity: 0 }}
-                                 transition={{
-                                    type: 'spring',
-                                    stiffness: 300,
-                                    damping: 30
-                                 }}
-                                 className='absolute inset-0'
-                              >
-                                 <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
-                                    <ProjectList onProjectClick={handleProjectClick}/>
-                                 </LenisProvider>
-                              </motion.div>
-                           ) : (
-                              <motion.div
-                                 key="project-detail"
-                                 initial={{ x: '100%', opacity: 0 }}
-                                 animate={{ x: 0, opacity: 1 }}
-                                 exit={{ x: '100%', opacity: 0 }}
-                                 transition={{
-                                    type: 'spring',
-                                    stiffness: 300,
-                                    damping: 30
-                                 }}
-                                 className='absolute inset-0 px-4'
-                              >
-                                 <ProjectDetail
-                                    project={selectedProject}
-                                    onClose={handleCloseDetail}
-                                 />
-                              </motion.div>
-                           )}
-                        </AnimatePresence>
-                     </div>
+                  <TabPanel className="h-full relative overflow-hidden">
+                     <AnimatePresence mode='wait'>
+                        {!selectedProject ? (
+                           <motion.div
+                              key="project-list"
+                              initial={{ x: 0 }}
+                              animate={{ x: 0 }}
+                              exit={{ x: '-100%' }}
+                              transition={{
+                                 type: 'tween',
+                                 duration: 0.4,
+                                 ease: 'easeOut'
+                              }}
+                              className='absolute inset-0 w-full h-full'
+                           >
+                              <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
+                                 <ProjectList onProjectClick={handleProjectClick}/>
+                              </LenisProvider>
+                           </motion.div>
+                        ) : (
+                           <motion.div
+                              key="project-detail"
+                              initial={{ x: '100%' }}
+                              animate={{ x: 0 }}
+                              exit={{ x: '100%' }}
+                              transition={{
+                                 type: 'tween',
+                                 duration: 0.4,
+                                 ease: 'easeOut'
+                              }}
+                              className='absolute inset-0 w-full h-full px-4'
+                           >
+                              <ProjectDetail
+                                 project={selectedProject}
+                                 onClose={handleCloseDetail}
+                              />
+                           </motion.div>
+                        )}
+                     </AnimatePresence>
                   </TabPanel>
                   <TabPanel className="h-full">
                      <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
