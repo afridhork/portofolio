@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState} from 'react'
-import { motion, MotionStyle, useScroll, AnimationProps } from 'framer-motion'
+import { motion, MotionStyle, useScroll, AnimatePresence } from 'framer-motion'
 import useSmooth from '../../../hooks/useSmooth'
 import LenisProvider from '../../../libs/react-lenis'
 import ProjectList from '../../../components/ProjectList/page'
+import ProjectDetail from '../../../components/ProjectDetail/page'
 import FindWord from '../../../components/Games/FindWord/page'
 import MatchWord from '../../../components/Games/MatchWord/page'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { projectData } from '../../../types/projectData'
 
 import MatchJson from '../../../static/matchWordJson.json'
 import { useCheckDevice } from '../../../app/store/store'
 
 export default function ProjectsSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
    const { device } = useCheckDevice()
+   const [selectedProject, setSelectedProject] = useState<projectData | null>(null)
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
       questionList: [
@@ -34,7 +37,7 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
       const data = {...MatchJson}
       setMatchWordData(data)
    }, [])
-   
+
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -42,10 +45,9 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
       damping: 50,
       restDelta: 0.001
    }
-   
+
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      // offset: ['0', '1']
       offset: ['0 1', '1 0.1']
    })
 
@@ -65,46 +67,86 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
       }
    }, [])
 
-  return (
-   <section className='relative pt-20' ref={currentRef}>
-      <div className='flex justify-center' style={{ perspective: '10rem' }}>
-         <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
-            style={animationStyle}
-            className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8`}
-            data-testid="terminal"
-         >
-            <span className='flex justify-center items-center text-white text-4xl'>My Projects</span>
-            <Tabs className="grid relative h-[26rem] w-full overflow-hidden ">
-               <TabList>
-                  <Tab>Project's</Tab>
-                  <Tab>Mini Games</Tab>
-               </TabList>
+   const handleProjectClick = (project: projectData) => {
+      setSelectedProject(project)
+   }
 
-               <TabPanels className="h-full relative overflow-hidden  pb-8">
-                  <TabPanel className="h-full">
-                     <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
-                        <ProjectList/>
-                     </LenisProvider>
-                  </TabPanel>
-                  <TabPanel className="h-full">
-                     <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
-                        <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-x-2'>
-                           <div className='col-span-1 border border-white h-[85%]'>
-                              <FindWord question='question' answer='answer' />
+   const handleCloseDetail = () => {
+      setSelectedProject(null)
+   }
+
+  return (
+   <div className='relative'>
+      <motion.section
+         className='relative pt-20'
+         ref={currentRef}
+         animate={{ x: selectedProject ? '-100%' : 0 }}
+         transition={{
+            type: 'tween',
+            duration: 0.5,
+            ease: 'easeInOut'
+         }}
+      >
+         <div className='flex justify-center' style={{ perspective: '10rem' }}>
+            <motion.div
+               initial={{ opacity: 0, y: 100 }}
+               animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
+               style={animationStyle}
+               className={`rounded-lg border border-white w-[85%] bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-8`}
+               data-testid="terminal"
+            >
+               <span className='flex justify-center items-center text-white text-4xl'>My Projects</span>
+               <Tabs className="grid relative h-[26rem] w-full overflow-hidden ">
+                  <TabList>
+                     <Tab>Project's</Tab>
+                     <Tab>Mini Games</Tab>
+                  </TabList>
+
+                  <TabPanels className="h-full relative overflow-hidden pb-8">
+                     <TabPanel className="h-full relative overflow-hidden">
+                        <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
+                           <ProjectList onProjectClick={handleProjectClick}/>
+                        </LenisProvider>
+
+                        <AnimatePresence>
+                           {selectedProject && (
+                              <motion.div
+                                 initial={{ x: '100%' }}
+                                 animate={{ x: 0 }}
+                                 exit={{ x: '100%' }}
+                                 transition={{
+                                    type: 'tween',
+                                    duration: 0.5,
+                                    ease: 'easeInOut'
+                                 }}
+                                 className='absolute inset-0 w-full h-full px-4 bg-[#0a0a0a]'
+                              >
+                                 <ProjectDetail
+                                    project={selectedProject}
+                                    onClose={handleCloseDetail}
+                                 />
+                              </motion.div>
+                           )}
+                        </AnimatePresence>
+                     </TabPanel>
+                     <TabPanel className="h-full">
+                        <LenisProvider className='h-full overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600'>
+                           <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-x-2'>
+                              <div className='col-span-1 border border-white h-[85%]'>
+                                 <FindWord question='question' answer='answer' />
+                              </div>
+                              <div className='hidden sm:block relative col-span-1 border border-white h-[85%]'>
+                                 <MatchWord question={matchWordData.questionList} answer={matchWordData.answerList} />
+                              </div>
                            </div>
-                           <div className='hidden sm:block relative col-span-1 border border-white h-[85%]'>
-                              <MatchWord question={matchWordData.questionList} answer={matchWordData.answerList} />
-                           </div>
-                        </div>
-                     </LenisProvider>
-                  </TabPanel>
-               </TabPanels>
-            </Tabs>
-                     
-         </motion.div>
-      </div>
-   </section>
+                        </LenisProvider>
+                     </TabPanel>
+                  </TabPanels>
+               </Tabs>
+
+            </motion.div>
+         </div>
+      </motion.section>
+   </div>
   )
 }
