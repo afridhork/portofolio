@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState} from 'react'
-import { motion, MotionStyle, useScroll, AnimationProps } from 'framer-motion'
+import { motion, MotionStyle, useScroll } from 'framer-motion'
 import useSmooth from '../../../hooks/useSmooth'
 import LenisProvider from '../../../libs/react-lenis'
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+
 import ProjectList from '../../../components/ProjectList/page'
+import AiComponent from './components/aiChatBot/ai'
 import FindWord from '../../../components/Games/FindWord/page'
 import MatchWord from '../../../components/Games/MatchWord/page'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import MatchJson from '../../../static/matchWordJson.json'
 import { useCheckDevice } from '../../../app/store/store'
@@ -80,6 +82,7 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                <TabList>
                   <Tab>Project's</Tab>
                   <Tab>Mini Games</Tab>
+                  <Tab>AI Chatbot</Tab>
                </TabList>
 
                <TabPanels className="h-full relative overflow-hidden  pb-8">
@@ -99,6 +102,9 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
                            </div>
                         </div>
                      </LenisProvider>
+                  </TabPanel>
+                  <TabPanel className="h-full">
+                     <AiComponent/>
                   </TabPanel>
                </TabPanels>
             </Tabs>
