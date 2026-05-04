@@ -4,7 +4,8 @@ import LenisProvider from '../../libs/react-lenis'
 import dynamic from 'next/dynamic'
 import { Providers } from '../../app/providers'
 import { useEffect, useState } from 'react'
-import { useCheckDevice } from '../../app/store/store'
+import { useStore } from '../../app/store/store'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const Particles = dynamic(() => import('../../components/TsParticles/page'))
 
@@ -13,7 +14,7 @@ export default function ClientLayout({ children, device }: { children: React.Rea
   const renderStatus = () => {
     setIsRendered(true)
   }
-  const { updateDevice } = useCheckDevice()
+  const { updateDevice } = useStore()
 
   useEffect(() => {
     if(device){
@@ -25,11 +26,18 @@ export default function ClientLayout({ children, device }: { children: React.Rea
   return (
     <LenisProvider root>
       <Particles status={renderStatus} />
-      {isRendered ? (
-        <div className="flex justify-center overflow-x-auto">
-          <Providers>{children}</Providers>
-        </div>
-      ) : null}
+      <AnimatePresence>
+        {isRendered && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            className="flex justify-center overflow-x-auto"
+          >
+            <Providers>{children}</Providers>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </LenisProvider>
   )
 }

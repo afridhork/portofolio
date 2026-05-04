@@ -8,8 +8,31 @@ import { headers } from "next/headers";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AfridhoRK Portofolio',
-  description: 'Portofolio website',
+  title: 'AfridhoRK Portofolio | Software Engineer & Front End Developer',
+  description: 'Portofolio website of Afridho R Kartawiria, a Software Engineer and Front End Developer specializing in React, Next.js, and modern web technologies.',
+  keywords: ['Afridho R Kartawiria', 'Portofolio', 'Software Engineer', 'Front End Developer', 'React', 'Next.js', 'Web Development'],
+  authors: [{ name: 'Afridho R Kartawiria' }],
+  openGraph: {
+    title: 'AfridhoRK Portofolio',
+    description: 'Software Engineer & Front End Developer Portofolio',
+    url: 'https://afridhork.com',
+    siteName: 'AfridhoRK Portofolio',
+    images: [
+      {
+        url: '/vercel.svg',
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AfridhoRK Portofolio',
+    description: 'Software Engineer & Front End Developer Portofolio',
+    images: ['/vercel.svg'],
+  },
 }
 
 export default function RootLayout({

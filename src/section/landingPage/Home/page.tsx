@@ -6,9 +6,11 @@ import {
   type MotionStyle
 } from 'framer-motion';
 import useSmooth from '../../../hooks/useSmooth'
+import { useStore } from '../../../app/store/store'
 
-export default function HomeSection({getAttribute}: {getAttribute: (value:any)=> void}) {
+export default function HomeSection() {
   const currentRef = useRef<HTMLDivElement>(null)
+  const { updateBreadcrumbGoTo } = useStore()
   
   const { scrollYProgress } = useScroll({
     target: currentRef,
@@ -21,9 +23,9 @@ export default function HomeSection({getAttribute}: {getAttribute: (value:any)=>
 
   useEffect(() => {
     if(currentRef.current){
-       getAttribute(0)
+       updateBreadcrumbGoTo('Home', 0)
     }
- }, [])
+  }, [updateBreadcrumbGoTo])
 
   return (
     <section ref={currentRef} className='relative'>
@@ -39,18 +41,6 @@ export default function HomeSection({getAttribute}: {getAttribute: (value:any)=>
           <span className='flex justify-center text-white text-sm sm:text-lg lg:text-2xl mt-0 sm:mt-3'>SOFTWARE ENGINEER AND FRONT END DEVELOPER</span>
         </div>
       </motion.div>
-      {/* <div style={{ perspective: '10rem' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 200, transition: { ...transition, delay: 0.4 } }}
-          style={style}
-          ref={terminalRef}
-          onClick={() => promptRef.current?.focus()}
-          className={`${className} h-[32rem] w-full  overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter`}
-          data-testid="terminal"
-        >
-        </motion.div>
-      </div> */}
       <motion.div style={{...text}}>
         <ArrowAnimation/>
       </motion.div>

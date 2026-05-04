@@ -1,0 +1,11 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: porto-web
+    ports:
+      - "3005:3005"
+    env_file:
+      - .env
+    restart: always

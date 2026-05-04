@@ -1,5 +1,5 @@
-import React, { Suspense, useEffect, useRef } from 'react'
-import { AnimationProps, MotionStyle, motion, useScroll, useTransform } from 'framer-motion'
+import React, { useEffect, useRef } from 'react'
+import { MotionStyle, motion, useScroll } from 'framer-motion'
 import useSmooth from '../../../hooks/useSmooth'
 import { Accordion } from '@chakra-ui/react'
 import { AccordionItem } from '@chakra-ui/react'
@@ -9,11 +9,11 @@ import { AccordionIcon } from '@chakra-ui/react'
 import { AccordionPanel } from '@chakra-ui/react'
 import LenisProvider from '../../../libs/react-lenis'
 import Link from 'next/link'
-import { useCheckDevice } from '../../../app/store/store'
+import { useStore } from '../../../app/store/store'
 
 
-const Experience = ({getAttribute}:{getAttribute: (value:any)=>void}) => {
-   const { device } = useCheckDevice()
+const Experience = () => {
+   const { device, updateBreadcrumbGoTo } = useStore()
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
       type: 'spring',
@@ -24,13 +24,10 @@ const Experience = ({getAttribute}:{getAttribute: (value:any)=>void}) => {
    
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      // offset: ['0', '1']
       offset: ['0 1', '1 0.1']
    })
 
    const animationStyle: MotionStyle = {
-      // rotateX: useSmooth(scrollYProgress, [0, 1], [2, 0]),
-      // scale: useSmooth(scrollYProgress, [0, 1], [0.8, 1])
       rotateX: useSmooth(scrollYProgress, [0, 0.5], [2, 0]),
       scale: useSmooth(scrollYProgress, [0, 0.5], [0.8, 1])
    }
@@ -40,11 +37,12 @@ const Experience = ({getAttribute}:{getAttribute: (value:any)=>void}) => {
          setTimeout(() => {
             const rect = currentRef.current?.getBoundingClientRect();
             if(rect){
-               getAttribute(device === 'desktop' ? rect.top : rect.top - 100)
+               const value = device === 'desktop' ? rect.top : rect.top - 100
+               updateBreadcrumbGoTo('Experience', value + 50)
             }
          }, 500);
       }
-   }, [])
+   }, [device, updateBreadcrumbGoTo])
    
    const contact = [
       {socialMedia: 'GitHub', img:'/assets/Github.svg', url: 'https://github.com/afridhork'},
@@ -62,7 +60,6 @@ const Experience = ({getAttribute}:{getAttribute: (value:any)=>void}) => {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
             style={animationStyle}
-            // ref={currentRef}
             className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter mb-20 p-10`}
             data-testid="terminal"
          >

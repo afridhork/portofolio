@@ -1,15 +1,15 @@
-import React, { RefObject, Suspense, useEffect, useRef } from 'react'
-import { motion, MotionStyle, useScroll, AnimationProps, useTransform } from 'framer-motion'
+import React, { Suspense, useEffect, useRef } from 'react'
+import { motion, MotionStyle, useScroll, AnimationProps } from 'framer-motion'
 import useSmooth from '../../../hooks/useSmooth'
 import { Canvas } from '@react-three/fiber'
 import { Float, TrackballControls } from '@react-three/drei'
 import LenisProvider from '../../../libs/react-lenis'
 import { dataSkill } from '../../../static/skillData'
 import dynamic from 'next/dynamic'
-import { useCheckDevice } from '../../../app/store/store'
+import { useStore } from '../../../app/store/store'
 
-export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
-   const { device } = useCheckDevice()
+export default function ExpertiseSection() {
+   const { device, updateBreadcrumbGoTo } = useStore()
    const Spehere = dynamic(() => import('../../../components/SphereExpertise/page'), {ssr: false})
    const currentRef = useRef<HTMLDivElement>(null)
    const transition = {
@@ -21,7 +21,6 @@ export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: num
    
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      // offset: ['0', '1']
       offset: ['0 1', '1 0.1']
    })
 
@@ -35,11 +34,11 @@ export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: num
          setTimeout(() => {
             const rect = currentRef.current?.getBoundingClientRect();
             if(rect){
-               getAttribute(device === 'desktop' ? rect.top : rect.top - 100)
+               updateBreadcrumbGoTo('Expertise', device === 'desktop' ? rect.top : rect.top - 100)
             }
          }, 500);
       }
-   }, [])
+   }, [device, updateBreadcrumbGoTo])
    
    const initial: AnimationProps['initial'] = { opacity: 0 }
    const animate: AnimationProps['animate'] = {
@@ -69,7 +68,6 @@ export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: num
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.4 } }}
             style={animationStyle}
-            // ref={currentRef}
             className={`relative h-[32rem] w-[85%] overflow-hidden rounded-lg border border-white bg-opacity-50 font-mono text-sm text-gray-300 backdrop-blur-lg backdrop-filter p-10`}
             data-testid="terminal"
          >
@@ -92,16 +90,14 @@ export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: num
                      <Canvas
                         dpr={[1, 2]}
                         camera={{ position: [0, 0, 35], fov: 90 }}
-                        // resize={{ polyfill: ResizeObserver }}
                         data-testid="3d-canvas"
                      >
                         <fog attach="fog" args={['#0D0409', 0, 80]} />
                         <Float 
-                           speed={2} // Animation speed, defaults to 1
-                           rotationIntensity={5} // XYZ rotation intensity, defaults to 1
+                           speed={2} 
+                           rotationIntensity={5} 
                            floatIntensity={1}
                         >
-                           {/* <SphereExpertise/> */}
                            <Spehere/>
                         </Float>
                         <TrackballControls rotateSpeed={5} noPan noZoom />
@@ -112,7 +108,6 @@ export default function ExpertiseSection({getAttribute}:{getAttribute: (pos: num
                   <motion.div
                      data-testid="skills-list"
                      key="skills-list"
-                     // style={listScroll}
                      initial={initial}
                      animate={animate}
                      exit={exit}

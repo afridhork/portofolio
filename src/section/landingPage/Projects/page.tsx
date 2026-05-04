@@ -10,10 +10,10 @@ import FindWord from '../../../components/Games/FindWord/page'
 import MatchWord from '../../../components/Games/MatchWord/page'
 
 import MatchJson from '../../../static/matchWordJson.json'
-import { useCheckDevice } from '../../../app/store/store'
+import { useStore } from '../../../app/store/store'
 
-export default function ProjectsSection({getAttribute}:{getAttribute: (pos: number)=>void}) {
-   const { device } = useCheckDevice()
+export default function ProjectsSection() {
+   const { device, updateBreadcrumbGoTo } = useStore()
    const [matchWordData, setMatchWordData] = useState({
       gameType : 1,
       questionList: [
@@ -47,7 +47,6 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
    
    const { scrollYProgress } = useScroll({
       target: currentRef,
-      // offset: ['0', '1']
       offset: ['0 1', '1 0.1']
    })
 
@@ -61,11 +60,11 @@ export default function ProjectsSection({getAttribute}:{getAttribute: (pos: numb
          setTimeout(() => {
             const rect = currentRef.current?.getBoundingClientRect();
             if(rect){
-               getAttribute(device === 'desktop' ? rect.top : rect.top - 100)
+               updateBreadcrumbGoTo('Project', rect.top + 50)
             }
          }, 500);
       }
-   }, [])
+   }, [updateBreadcrumbGoTo])
 
   return (
    <section className='relative pt-20' ref={currentRef}>
