@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AfridhoRK Portfolio
 
-## Getting Started
+Personal portfolio for Afridho R Kartawiria, showcasing frontend and software engineering projects through an animated, interactive interface.
 
-First, run the development server:
+## Features
+
+- Responsive landing page with Home, Expertise, Projects, and Experience sections
+- Animated UI powered by Framer Motion and Lenis
+- Interactive project gallery and detail pages
+- Mini games and an OpenRouter-backed AI chatbot
+- Three.js/React Three Fiber visuals and particle effects
+
+## Tech Stack
+
+- Next.js 14 App Router and React 18
+- TypeScript
+- Tailwind CSS and Chakra UI
+- Framer Motion and Lenis
+- Zustand
+- React Three Fiber, Drei, and tsParticles
+
+## Local Development
+
+Requirements: Node.js 20 and npm.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3005](http://localhost:3005).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The chatbot requires this environment variable:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+OPENROUTER_API_KEY=your_key
+```
 
-## Learn More
+Keep credentials in an ignored local environment file and never commit real keys.
 
-To learn more about Next.js, take a look at the following resources:
+## Verification
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Production
 
-## Deploy on Vercel
+The app uses Next.js standalone output and includes a multi-stage Docker build:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker compose up --build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The container exposes port `3005`.
+
+## Project Structure
+
+- `src/app` — routes, layout, providers, and API handlers
+- `src/components` — reusable UI components
+- `src/section` — landing-page sections and feature UI
+- `src/static` — portfolio content and static game data
+- `src/assets`, `public/assets` — images, icons, and videos

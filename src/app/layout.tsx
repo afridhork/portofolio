@@ -8,6 +8,7 @@ import { headers } from "next/headers";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://afridhork.com'),
   title: 'AfridhoRK Portofolio | Software Engineer & Front End Developer',
   description: 'Portofolio website of Afridho R Kartawiria, a Software Engineer and Front End Developer specializing in React, Next.js, and modern web technologies.',
   keywords: ['Afridho R Kartawiria', 'Portofolio', 'Software Engineer', 'Front End Developer', 'React', 'Next.js', 'Web Development'],

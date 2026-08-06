@@ -5,7 +5,7 @@ import {data} from '../../../static/projectData'
 import {projectData} from '../../../types/projectData'
 import ImageSlider from '../../../components/chakraCarousel'
 
-const page = ({params}: {params: {slug: string}}) => {
+const ProjectDetailPage = ({params}: {params: {slug: string}}) => {
   // const dataBreadcrumbs: string[] = ['Main', 'Project Detail', `${params.slug.replace(/%20/g, " ")}`]
   const breadcrumbs = [
     {goTo: '/', name: 'Main'},
@@ -29,7 +29,7 @@ const page = ({params}: {params: {slug: string}}) => {
         setProjectData(projectDatas[i as keyof typeof projectDatas] as projectData)        
       }
     }
-  }, [])
+  }, [params.slug])
   
   return (
     <div>
@@ -53,7 +53,7 @@ const page = ({params}: {params: {slug: string}}) => {
                   projectData.techStack.map((tech,index)=>{
                     return(
                       <div className='flex justify-center' key={index}>
-                        <img src={`/assets/${tech === 'NextJs' ? 'test' : tech}.svg`} className='w-[20px] sm:w-[30px] h-[15px] sm:h-[20px]'/>
+                        <img src={`/assets/${tech === 'NextJs' ? 'test' : tech}.svg`} alt={`${tech} logo`} className='w-[20px] sm:w-[30px] h-[15px] sm:h-[20px]'/>
                       </div>
                     )
                   })
@@ -85,4 +85,4 @@ const page = ({params}: {params: {slug: string}}) => {
   )
 }
 
-export default page
+export default ProjectDetailPage

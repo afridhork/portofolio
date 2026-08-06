@@ -79,7 +79,7 @@ export default function ProjectsSection() {
             <span className='flex justify-center items-center text-white text-4xl'>My Projects</span>
             <Tabs className="grid relative h-[26rem] w-full overflow-hidden ">
                <TabList>
-                  <Tab>Project's</Tab>
+                  <Tab>Projects</Tab>
                   <Tab>Mini Games</Tab>
                   <Tab>AI Chatbot</Tab>
                </TabList>

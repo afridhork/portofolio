@@ -21,7 +21,7 @@ const Experience = () => {
       damping: 50,
       restDelta: 0.001
    }
-   
+
    const { scrollYProgress } = useScroll({
       target: currentRef,
       offset: ['0 1', '1 0.1']
@@ -43,7 +43,7 @@ const Experience = () => {
          }, 500);
       }
    }, [device, updateBreadcrumbGoTo])
-   
+
    const contact = [
       {socialMedia: 'GitHub', img:'/assets/Github.svg', url: 'https://github.com/afridhork'},
       {socialMedia: 'Instagram', img:'/assets/Instagram.svg', url: 'https://www.instagram.com/pidorkartawiria/'},
@@ -51,7 +51,7 @@ const Experience = () => {
       {socialMedia: 'Gmail', img:'/assets/Gmail.svg', url:'https://mail.google.com/mail/u/0/?fs=1&to=afridhorkartawiria@gmail.com&tf=cm'},
    ]
   return (
-   <section 
+   <section
       className='relative pt-20'
       ref={currentRef}
    >
@@ -71,7 +71,7 @@ const Experience = () => {
                      <span className='block'>SOFTWARE ENGINEER AND FRONT END DEVELOPER</span>
                      <br />
                      <div className='flex items-center cursor-pointer mb-1'>
-                        <Link aria-label='to-CV' href={`https://drive.google.com/file/d/1ltX0C211r1bDMLopaiZHVJNlI3ZFdnWL/view?usp=sharing`} target='_blank'><span className='block text-sm '>RESUME</span></Link>
+                        <Link aria-label='to-CV' href={`https://drive.google.com/file/d/1qqK0X0AgphDBRodsZDD_csYpQLjwkEyZ/view?usp=sharing`} target='_blank'><span className='block text-sm '>RESUME</span></Link>
                         <svg aria-label='top-right-sign' fill="#e5e7eb" className='ml-1' height="8" width="8" version="1.1" id="arrow_rightup" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
                            <g>
                               <g>
@@ -125,7 +125,7 @@ const Experience = () => {
                            }
                         </div>
                      </div>
-                     <h5>Welcome to my portfolio! As a front-end web developer, I specialize in crafting engaging and intuitive user experiences. With expertise in technologies like HTML, CSS, JavaScript, and frameworks like React.js and Next.js, I bring ideas to life and create dynamic web applications. Whether it's building responsive layouts, implementing sleek animations, or optimizing for performance, I strive to deliver high-quality solutions that exceed expectations. Take a look around to explore my projects and get in touch to discuss how we can collaborate on your next digital venture!</h5>
+                     <h5>Welcome to my portfolio! As a front-end web developer, I specialize in crafting engaging and intuitive user experiences. With expertise in technologies like HTML, CSS, JavaScript, and frameworks like React.js and Next.js, I bring ideas to life and create dynamic web applications. Whether it&apos;s building responsive layouts, implementing sleek animations, or optimizing for performance, I strive to deliver high-quality solutions that exceed expectations. Take a look around to explore my projects and get in touch to discuss how we can collaborate on your next digital venture!</h5>
                      <span className='block text-xl sm:text-xl lg:text-2xl py-2'>Experience</span>
                      <Accordion allowToggle>
 
@@ -140,7 +140,7 @@ const Experience = () => {
                            </h2>
                            <AccordionPanel pb={4}>
                               <h4>Computer Science University of Lampung (2019-2020)</h4>
-                              <p>I am Graduated with a bachelor's degree and learning the basics of programming and IT-related concepts here.</p>
+                              <p>I am Graduated with a bachelor&apos;s degree and learning the basics of programming and IT-related concepts here.</p>
                            </AccordionPanel>
                         </AccordionItem>
 
