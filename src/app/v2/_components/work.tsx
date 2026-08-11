@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { v2Projects } from '../data'
@@ -36,16 +35,13 @@ function ProjectCard({ project, index }: { project: (typeof v2Projects)[number],
             <span key={tech} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-white/55">{tech}</span>
           ))}
         </div>
-        <Link href={`/v2/project/${slug}`} className="mt-10 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300 hover:text-emerald-200">
-          View case study <span aria-hidden>→</span>
-        </Link>
       </motion.div>
 
       <motion.div
         style={{ y: mediaY, opacity: mediaOpacity }}
         className={index % 2 ? 'lg:order-1' : ''}
       >
-        <Link href={`/v2/project/${slug}`} className="group relative block h-[26rem] overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] sm:h-[34rem] lg:h-[42rem]">
+        <div className="group relative block h-[26rem] overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.03] sm:h-[34rem] lg:h-[42rem]">
           <motion.div
             style={{ clipPath: mediaClip, scale: mediaScale }}
             className="absolute inset-0"
@@ -55,7 +51,7 @@ function ProjectCard({ project, index }: { project: (typeof v2Projects)[number],
             </motion.div>
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-t from-[#07090f]/90 via-[#07090f]/20 to-transparent" />
-        </Link>
+        </div>
       </motion.div>
     </motion.article>
   )
@@ -79,12 +75,9 @@ function HorizontalProjectCard({ project, count }: { project: (typeof v2Projects
             <span key={tech} className="rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-xs text-white/70">{tech}</span>
           ))}
         </div>
-        <Link href={`/v2/project/${slug}`} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300 hover:text-emerald-200">
-          View case study <span aria-hidden>→</span>
-        </Link>
       </div>
 
-      <Link href={`/v2/project/${slug}`} className="group relative min-h-0 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d111b]">
+      <div className="group relative min-h-0 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d111b]">
         <Image
           src={preview}
           fill
@@ -92,7 +85,7 @@ function HorizontalProjectCard({ project, count }: { project: (typeof v2Projects
           alt={`${project.name} preview`}
           className="object-contain p-3 opacity-85 transition duration-1000 group-hover:scale-[1.025] group-hover:opacity-100 lg:p-6"
         />
-      </Link>
+      </div>
     </article>
   )
 }
@@ -102,7 +95,6 @@ export function V2ProjectsSection() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const labelY = useTransform(scrollYProgress, [0, 1], [56, -28])
   const titleY = useTransform(scrollYProgress, [0, 1], [88, -48])
-  const linkY = useTransform(scrollYProgress, [0, 1], [110, -32])
   const desktopProjects = v2Projects.slice(0, 3)
   const desktopTrackX = useTransform(scrollYProgress, [0.18, 0.82], ['0%', `-${((desktopProjects.length - 1) / desktopProjects.length) * 100}%`])
 
@@ -112,9 +104,6 @@ export function V2ProjectsSection() {
         <motion.span style={{ y: labelY }} className="block font-mono text-xs uppercase tracking-[0.3em] text-emerald-300/80">Selected work</motion.span>
         <div className="mt-4 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <motion.h2 style={{ y: titleY }} className="max-w-4xl text-4xl tracking-[-0.04em] text-white sm:text-6xl">Business platforms built around real operations.</motion.h2>
-          <motion.div style={{ y: linkY }}>
-            <Link href="/v2/project" className="shrink-0 text-sm text-white/55 hover:text-white">All projects →</Link>
-          </motion.div>
         </div>
 
         <div className="mt-12 lg:hidden">

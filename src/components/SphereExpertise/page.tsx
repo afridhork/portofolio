@@ -30,7 +30,9 @@ const SphereExpertise = (): JSX.Element => {
       'Socketdotio',
       'Python',
       'Frappe',
-      'ERPNext'
+      'ERPNext',
+      'Three',
+      'Framer'
     ]
 
     const isFloat = (number: number): boolean => {

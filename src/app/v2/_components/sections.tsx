@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import V2SkillSphere from './SkillSphere'
-import HeroSphereMorph from './HeroSphereMorph'
 
 export function V2HomeSection() {
   const ref = useRef<HTMLElement>(null)
@@ -15,7 +14,6 @@ export function V2HomeSection() {
 
   return (
     <section id="home" ref={ref} className="v2-section v2-container overflow-hidden">
-      <HeroSphereMorph scrollYProgress={scrollYProgress} />
       <motion.div
         aria-hidden="true"
         style={{ y: glowY, scale: glowScale }}
@@ -72,7 +70,7 @@ export function V2HomeSection() {
           transition={{ duration: 0.6, delay: 0.35 }}
           className="mt-12 flex flex-wrap items-center gap-3"
         >
-          <a href="/v2/project" className="rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-black transition-transform hover:scale-[1.03]">
+          <a href="#projects" className="rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-black transition-transform hover:scale-[1.03]">
             View Projects
           </a>
           <a href="https://drive.google.com/file/d/1qqK0X0AgphDBRodsZDD_csYpQLjwkEyZ/view?usp=sharing" target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/5">
