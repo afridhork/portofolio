@@ -9,30 +9,28 @@ const SphereExpertise = (): JSX.Element => {
     const temp: Array<[Vector3, string]> = []
     const skills: string[] = [
       'Javascript',
-      'php',
-      'laravel',
       'Typescript',
       'Html5',
       'Css',
-      'vsc',
       'Git',
       'Github',
-      'Gitlab',
       'NodeJs',
       'Express',
-      'NPM',
       'ReactJs',
       'Redux',
-      'test',
+      'NextJs',
       'VueJs',
       'NuxtJs',
       'Tailwind',
       'Bootstrap',
-      'Framer',
-      'Three',
-      'React-Query',
-      'Jest',
-      'rtl'
+      'php',
+      'laravel',
+      'MySQL',
+      'Redis',
+      'Socketdotio',
+      'Python',
+      'Frappe',
+      'ERPNext'
     ]
 
     const isFloat = (number: number): boolean => {

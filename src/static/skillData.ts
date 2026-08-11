@@ -1,41 +1,62 @@
 export const dataSkill = [
    {
-      category:'Programming and Markup Languages',
+      category:'Frontend Engineering',
       skillList:[
-         {name:'JavaScript'},
          {name:'TypeScript'},
-         {name:'PHP'},
-         {name:'HTML'},
-         {name:'CSS'},
-      ]
-   },
-   {
-      category:'Development Tools',
-      skillList:[
-         {name:'VS Code'},
-         {name:'Git'},
-         {name:'GitHub'},
-         {name:'GitLab'},
-      ]
-   },
-   {
-      category:'Frameworks, Platforms and Libraries',
-      skillList:[
-         {name:'Laravel'},
-         {name:'NPM'},
-         {name:'NodeJs'},
-         {name:'ExpressJS'},
-         {name:'ReactJS'},
+         {name:'JavaScript'},
+         {name:'React.js'},
+         {name:'Next.js'},
+         {name:'Vue.js'},
+         {name:'Nuxt.js'},
          {name:'Redux'},
-         {name:'NextJS'},
-         {name:'VueJS'},
-         {name:'NuxtJS'},
-         {name:'Tailwind'},
-         {name:'Bootsttap'},
-         {name:'Framer'},
-         {name:'Three'},
-         {name:'Jest'},
-         {name:'React Testing Librabry'}
+         {name:'Zustand'},
+         {name:'Tailwind CSS'},
+         {name:'Component architecture'},
+         {name:'State management'},
+      ]
+   },
+   {
+      category:'Backend and API',
+      skillList:[
+         {name:'Node.js'},
+         {name:'Express.js'},
+         {name:'Laravel'},
+         {name:'PHP'},
+         {name:'REST APIs'},
+         {name:'API integration'},
+         {name:'API design'},
+      ]
+   },
+   {
+      category:'Data and Real-time',
+      skillList:[
+         {name:'MySQL'},
+         {name:'Redis'},
+         {name:'Relational data modeling'},
+         {name:'Database design'},
+         {name:'SQL query optimization'},
+         {name:'WebSocket'},
+         {name:'Socket.IO'},
+      ]
+   },
+   {
+      category:'Frappe and ERPNext',
+      skillList:[
+         {name:'Frappe CRM'},
+         {name:'ERPNext'},
+         {name:'Custom apps and overrides'},
+         {name:'Workflows and forms'},
+         {name:'Custom fields and fixtures'},
+         {name:'Reports and business logic'},
+      ]
+   },
+   {
+      category:'AI and Automation',
+      skillList:[
+         {name:'LLM integration'},
+         {name:'Prompt engineering'},
+         {name:'Automated design pipelines'},
+         {name:'Python automation'},
       ]
    }
 ]
