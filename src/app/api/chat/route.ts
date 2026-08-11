@@ -12,11 +12,16 @@ If the user greets you, greet them back politely.
 
 export async function POST(req: Request) {
     const { messages } = await req.json();
+    const apiKey = process.env.OPENROUTER_API_KEY;
+
+    if (!apiKey) {
+      return new Response("OPENROUTER_API_KEY is not configured", { status: 500 });
+    }
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -27,6 +32,14 @@ export async function POST(req: Request) {
         temperature: 0.7,
       }),
     });
+
+    if (!response.ok) {
+      const error = await response.text();
+      return new Response(error || "OpenRouter request failed", {
+        status: response.status,
+        headers: { "Content-Type": "text/plain; charset=utf-8" },
+      });
+    }
 
     const encoder = new TextEncoder();
     

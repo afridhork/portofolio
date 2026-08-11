@@ -6,7 +6,10 @@
     "dev": "next dev --port 3005",
     "build": "NODE_ENV=production next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up",
+    "docker:dev:down": "docker compose -f docker-compose.dev.yml down",
+    "docker:prod": "docker compose up -d --build"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.2.0",

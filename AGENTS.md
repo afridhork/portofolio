@@ -1,38 +1,26 @@
-# AGENTS.md
+# Project Instructions
 
-## Project Summary
-- Stack: Next.js 14 App Router, React 18, TypeScript, Tailwind CSS, Chakra UI, Framer Motion, Zustand.
-- App runs on port `3005` in development (`npm run dev`).
-- Production build uses Next standalone output (`next.config.js`).
-
-## Repo Structure
-- `src/app`: App Router pages, layout, providers, API routes.
-- `src/components`: reusable UI building blocks.
-- `src/section`: landing page sections and feature-specific UI.
-- `src/static`: portfolio data and static JSON.
-- `src/assets` and `public/assets`: images, SVGs, videos.
+## Scope
+- This repository is a personal portfolio built with Next.js 14 App Router, React 18, TypeScript, Tailwind CSS, Chakra UI, Three.js, and Framer Motion.
+- Keep project-specific changes in `src/`; static portfolio content belongs in `src/static/`, shared types in `src/types/`, and reusable UI in `src/components/`.
 
 ## Working Rules
-- Read the target files first; keep diffs minimal.
-- Prefer existing dependencies and native Next/React patterns; do not add packages unless necessary.
-- Match the current style: semicolon-light TS/TSX, functional components, local types when small.
-- Do not touch `.env` contents or expose secrets.
-- Do not commit or rewrite history unless explicitly asked.
+- Read the relevant file and trace its imports/usages before editing.
+- Prefer the smallest working diff. Do not refactor unrelated code or overwrite existing user changes.
+- Keep TypeScript strictness enabled; do not weaken `tsconfig.json` to bypass errors.
+- Do not add dependencies unless an existing/native solution is insufficient.
+- Keep secrets out of source control. Never read or print `.env` contents.
+- Preserve the existing visual behavior unless the task explicitly requests UI changes.
+- For project data, update `src/static/projectData.ts` and keep `ProjectData` in `src/types/projectData.ts` consistent.
+- Use `next/image` for new local image usage when practical; preserve existing image behavior during unrelated changes.
 
 ## Verification
-- Install dependencies first if `node_modules` is missing: `npm install`.
-- Main checks:
-  - `npm run lint`
-  - `npm run build`
-- If a command fails because dependencies are not installed, report that clearly instead of guessing.
+- Install with `npm ci` when dependencies need to be restored.
+- Run `npm run lint` and `npm run build` after code changes.
+- CodeGraph is initialized in `.codegraph/`; use it for symbol/call-path/impact exploration when relevant, then run `codegraph sync .` after source changes.
+- Do not commit, push, or rewrite history unless explicitly requested.
 
-## Project-Specific Notes
-- Chatbot UI posts to `src/app/api/chat/route.ts`.
-- There is also `src/app/api/ai/route.ts`; verify which API route is actually used before editing chatbot behavior.
-- Media-heavy assets live in-repo; avoid broad scans over binary files when inspecting.
-
-## Known Review Findings
-- `.codegraph/` is initialized; use CodeGraph first for symbol relationships and impact analysis.
-- `npm run lint` uses Next.js ESLint config from `.eslintrc.json`; keep `eslint` and `eslint-config-next` installed.
-- `.env` is tracked in git in this repo; treat it as sensitive and avoid printing or modifying it unless the user explicitly asks.
-- Next.js `14.0.1` has published security advisories; upgrade it separately and verify the UI before deployment.
+## Known Constraints
+- The AI chat endpoint requires `OPENROUTER_API_KEY` at runtime.
+- Development runs on port 3005 (`npm run dev`).
+- The working tree may contain user changes; inspect `git status` before editing and avoid unrelated files.

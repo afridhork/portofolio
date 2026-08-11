@@ -30,6 +30,22 @@ npm run dev
 
 Open [http://localhost:3005](http://localhost:3005).
 
+## Docker Development
+
+For hot-reload development inside Docker:
+
+```bash
+npm run docker:dev
+```
+
+Stop it with:
+
+```bash
+npm run docker:dev:down
+```
+
+This mode mounts the local source code into the container and runs `next dev` on port `3005`.
+
 The chatbot requires this environment variable:
 
 ```bash
@@ -50,7 +66,7 @@ npm run build
 The app uses Next.js standalone output and includes a multi-stage Docker build:
 
 ```bash
-docker compose up --build
+npm run docker:prod
 ```
 
 The container exposes port `3005`.

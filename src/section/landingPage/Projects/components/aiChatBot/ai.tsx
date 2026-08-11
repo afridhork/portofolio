@@ -42,13 +42,27 @@ export default function ChatBot() {
         const newMessages = [...messages, userMessage];
         const res = await fetch("/api/chat", {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
             messages: newMessages,
             }),
         });
 
+        if (!res.ok) {
+            const error = await res.text();
+            setMessages(prev => [...prev, {
+                role: "assistant",
+                content: error || "Gagal mendapatkan balasan dari AI.",
+            }]);
+            setIsTyping(false);
+            return;
+        }
+
         const reader = res.body?.getReader();
-        if (!reader) return;
+        if (!reader) {
+            setIsTyping(false);
+            return;
+        }
 
         let assistantText = "";
 

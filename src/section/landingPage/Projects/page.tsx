@@ -5,7 +5,6 @@ import LenisProvider from '../../../libs/react-lenis'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import ProjectList from '../../../components/ProjectList/page'
-import AiComponent from './components/aiChatBot/ai'
 import FindWord from '../../../components/Games/FindWord/page'
 import MatchWord from '../../../components/Games/MatchWord/page'
 
@@ -81,7 +80,6 @@ export default function ProjectsSection() {
                <TabList>
                   <Tab>Projects</Tab>
                   <Tab>Mini Games</Tab>
-                  <Tab>AI Chatbot</Tab>
                </TabList>
 
                <TabPanels className="h-full relative overflow-hidden  pb-8">
@@ -101,9 +99,6 @@ export default function ProjectsSection() {
                            </div>
                         </div>
                      </LenisProvider>
-                  </TabPanel>
-                  <TabPanel className="h-full">
-                     <AiComponent/>
                   </TabPanel>
                </TabPanels>
             </Tabs>
