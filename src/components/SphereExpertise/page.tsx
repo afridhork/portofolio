@@ -1,10 +1,29 @@
-import { Spherical, Vector3 } from 'three'
-import { useMemo } from 'react'
+import { Spherical, Vector3, type Group } from 'three'
+import { useEffect, useMemo, useRef } from 'react'
+import { useFrame, useThree } from '@react-three/fiber'
 import SphereIcon from '../SphereIcon/page'
-// import HomeSkillsIcon from './HomeSkillsIcon'
-// import isFloat from '@/helpers/isFloat'
 
 const SphereExpertise = (): JSX.Element => {
+  const group = useRef<Group>(null)
+  const interacting = useRef(false)
+  const { gl } = useThree()
+
+  useEffect(() => {
+    const element = gl.domElement
+    const pause = () => { interacting.current = true }
+    const resume = () => { interacting.current = false }
+    element.addEventListener('pointerdown', pause)
+    window.addEventListener('pointerup', resume)
+    return () => {
+      element.removeEventListener('pointerdown', pause)
+      window.removeEventListener('pointerup', resume)
+    }
+  }, [gl])
+
+  useFrame((_, delta) => {
+    if (group.current && !interacting.current) group.current.rotation.y += delta * 0.12
+  })
+
   const icons = useMemo(() => {
     const temp: Array<[Vector3, string]> = []
     const skills: string[] = [
@@ -47,7 +66,7 @@ const SphereExpertise = (): JSX.Element => {
     const thetaSpan = (Math.PI * 2) / count
 
     let currIndex = 0
-    
+
     for (let i = 1; i < count + 1; i++) {
       for (let j = 0; j < count; j++) {
         temp.push([
@@ -64,10 +83,8 @@ const SphereExpertise = (): JSX.Element => {
     return temp
   }, [])
 
-  
-
   return (
-    <group scale={0.9}>
+    <group ref={group} scale={0.9}>
       {icons.map(([pos, icon], index) => (
         <SphereIcon key={index} position={pos} icon={icon} />
       ))}
