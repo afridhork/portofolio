@@ -1,16 +1,10 @@
-import pt_image from '../../assets/porto/pt-landingPage.png'
-import sc_image from '../../assets/shopcart/sc-landindPage.png'
 import lpk_image from '../../assets/lpk/lpk-landingPage.png'
 import st_image from '../../assets/staycation/st-landindPage.png'
+import tms_front from '../../assets/tms/0-front.png'
+import tms_airport_list from '../../assets/tms/11-airport-list.png'
+import crm_front from '../../assets/crm/0-front.png'
+import crm_dashboard from '../../assets/crm/1-dashboard.png'
 
-import pt_lp from '../../assets/porto/pt-landingPage.png'
-import pt_sp from '../../assets/porto/pt-skillPage.png'
-import pt_dp from '../../assets/porto/pt-detailPage.png'
-import sc_lp from '../../assets/shopcart/data/sc-landindPage-lg.png'
-import sc_ctg from '../../assets/shopcart/data/sc-category.png'
-import sc_dtl from '../../assets/shopcart/data/sc-detail.png'
-import sc_co from '../../assets/shopcart/data/sc-checkout.png'
-import sc_cart from '../../assets/shopcart/data/sc-cart.png'
 import lpk_lp from '../../assets/lpk/lpk-landingPage.png'
 import lpk_login from '../../assets/lpk/lpk-login.png'
 import lpk_reg from '../../assets/lpk/lpk-register.png'
@@ -25,23 +19,23 @@ import type { projectData } from '../../types/projectData'
 export const v2Projects: projectData[] = [
   {
     name: 'TMS Platform',
-    techStack: ['Typescript', 'ReactJs', 'NodeJs', 'MySQL', 'Git'],
+    techStack: ['Laravel', 'VueJs', 'MySQL', 'Git'],
     category: 'Operational Platform',
     content:
       'Developed order workflows from creation and pickup through warehouse delivery for air and ocean export operations. The platform included driver management, protected routes, role-based access, and Mekari Talenta API integration to support day-to-day logistics operations.',
     link: 'https://afridhork.vercel.app/v2/project/tms-platform',
-    thumbnail: sc_image,
-    images: [{ image: sc_lp }, { image: sc_ctg }, { image: sc_dtl }, { image: sc_co }, { image: sc_cart }],
+    thumbnail: tms_front,
+    images: [{ image: tms_front }, { image: tms_airport_list }],
   },
   {
     name: 'CRM Platform',
-    techStack: ['Typescript', 'VueJs', 'Frappe', 'ERPNext', 'Redis'],
+    techStack: ['Python', 'VueJs', 'Frappe', 'ERPNext', 'Redis'],
     category: 'Business Workflow Platform',
     content:
       'Built dashboards and reporting for leads, deals, and quotations, then extended Frappe CRM safely through custom apps, overrides, workflows, fixtures, reports, and business logic without modifying upstream core code.',
     link: 'https://afridhork.vercel.app/v2/project/crm-platform',
-    thumbnail: pt_image,
-    images: [{ image: pt_lp }, { image: pt_sp }, { image: pt_dp }],
+    thumbnail: crm_front,
+    images: [{ image: crm_front }, { image: crm_dashboard }],
   },
   {
     name: 'LMS Platform',

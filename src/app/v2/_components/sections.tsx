@@ -1,16 +1,49 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import V2SkillSphere from './SkillSphere'
 
 export function V2HomeSection() {
   const ref = useRef<HTMLElement>(null)
+  const nameRef = useRef<HTMLParagraphElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [0, 150])
   const glowY = useTransform(scrollYProgress, [0, 1], [0, -220])
   const glowScale = useTransform(scrollYProgress, [0, 1], [1, 1.4])
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+
+  useEffect(() => {
+    const el = nameRef.current
+    if (!el) return
+    const stagger = el.querySelector<HTMLElement>('.v2-name-stagger')
+    if (!stagger) return
+    const text = stagger.textContent || ''
+    stagger.textContent = ''
+    const letters = text.split('')
+    const spans: HTMLSpanElement[] = []
+    letters.forEach((letter) => {
+      const span = document.createElement('span')
+      span.textContent = letter === ' ' ? '\u00A0' : letter
+      span.style.display = 'inline-block'
+      span.style.opacity = '0'
+      span.style.transform = 'translateY(80px)'
+      stagger.appendChild(span)
+      spans.push(span)
+    })
+    const timer = setTimeout(() => {
+      spans.forEach((span, i) => {
+        span.style.transition = `opacity 0.8s ease ${i * 0.12}s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.12}s`
+      })
+      // force browser to paint the initial state before triggering transition
+      void (stagger as HTMLElement).offsetHeight
+      spans.forEach((span) => {
+        span.style.opacity = '1'
+        span.style.transform = 'translateY(0)'
+      })
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <section id="home" ref={ref} className="v2-section v2-container overflow-hidden">
@@ -30,12 +63,21 @@ export function V2HomeSection() {
           Available for new projects
         </motion.span>
 
+        <p ref={nameRef} className="v2-name-tilt mb-6">
+          <span className="bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-400 bg-clip-text text-transparent">A</span>
+          <span>fridho&nbsp;</span>
+          <span className="v2-name-stagger text-emerald-300">R.</span>
+          <span>&nbsp;</span>
+          <span className="bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-400 bg-clip-text text-transparent">K</span>
+          <span>artawiria</span>
+        </p>
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.05 }}
           className="max-w-6xl text-left font-semibold tracking-[-0.04em] text-white"
-          style={{ fontSize: 'clamp(4rem, 11vw, 9rem)' }}
+          style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
         >
           I build systems
           <br />

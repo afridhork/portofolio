@@ -76,6 +76,14 @@ export default function V2Styles() {
       @media (min-width: 640px) { .v2-container { padding-left: 2.5rem; padding-right: 2.5rem; } }
       @media (min-width: 1024px) { .v2-container { padding-left: 4rem; padding-right: 4rem; } }
 
+      .v2-name-tilt {
+        font-size: clamp(2.5rem, 7vw, 5.5rem) !important;
+        line-height: 1.0 !important;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        color: #6ee7b7;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .v2-root * {
           animation-duration: 0.01ms !important;

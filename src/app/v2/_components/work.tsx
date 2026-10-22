@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useMotionTemplate, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { v2Projects } from '../data'
 
 function ProjectCard({ project, index }: { project: (typeof v2Projects)[number], index: number }) {
@@ -95,29 +95,52 @@ export function V2ProjectsSection() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const labelY = useTransform(scrollYProgress, [0, 1], [56, -28])
   const titleY = useTransform(scrollYProgress, [0, 1], [88, -48])
+  const shouldReduceMotion = useReducedMotion()
+  const labelRef = useRef<HTMLSpanElement>(null)
+  const [labelScale, setLabelScale] = useState(1)
+  const [labelStartX, setLabelStartX] = useState(0)
+  const labelScaleProgress = useTransform(scrollYProgress, [0, 0.2], shouldReduceMotion ? [1, 1] : [labelScale, 1])
+  const labelX = useTransform(scrollYProgress, [0, 0.2], shouldReduceMotion ? [0, 0] : [labelStartX, 0])
+  const labelZ = useTransform(scrollYProgress, [0, 0.2], shouldReduceMotion ? [0, 0] : [500, 0])
+  const labelBlur = useTransform(scrollYProgress, [0, 0.2], shouldReduceMotion ? [0, 0] : [4, 0])
+  const labelFilter = useMotionTemplate`blur(${labelBlur}px)`
+
+  useLayoutEffect(() => {
+    const updateLabelScale = () => {
+      const labelWidth = labelRef.current?.getBoundingClientRect().width ?? 0
+      if (labelWidth > 0) {
+        setLabelScale(Math.max(1, window.innerWidth / labelWidth))
+        setLabelStartX((window.innerWidth - labelWidth) / 2 - 64)
+      }
+    }
+    updateLabelScale()
+    window.addEventListener('resize', updateLabelScale)
+    return () => window.removeEventListener('resize', updateLabelScale)
+  }, [])
+
   const desktopProjects = v2Projects.slice(0, 3)
   const desktopTrackX = useTransform(scrollYProgress, [0.18, 0.82], ['0%', `-${((desktopProjects.length - 1) / desktopProjects.length) * 100}%`])
 
   return (
     <section id="projects" ref={ref} className="v2-container py-28 lg:h-[320svh]">
-      <div className="mx-auto max-w-7xl lg:sticky lg:top-0 lg:flex lg:h-svh lg:flex-col lg:justify-center lg:overflow-hidden">
-        <motion.span style={{ y: labelY }} className="block font-mono text-xs uppercase tracking-[0.3em] text-emerald-300/80">Selected work</motion.span>
-        <div className="mt-4 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-          <motion.h2 style={{ y: titleY }} className="max-w-4xl text-4xl tracking-[-0.04em] text-white sm:text-6xl">Business platforms built around real operations.</motion.h2>
-        </div>
+      <div className="mx-auto max-w-7xl lg:sticky lg:top-0 lg:flex lg:h-svh lg:flex-col lg:justify-center lg:overflow-hidden lg:[perspective:1000px]">
+        <motion.span ref={labelRef} style={{ x: labelX, y: labelY, z: labelZ, scale: labelScaleProgress, filter: labelFilter, transformOrigin: 'center center' }} className="block w-fit font-mono text-xs uppercase tracking-[0.3em] text-emerald-300/80 will-change-transform">Selected work</motion.span>
+          <div className="mt-4 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+            <motion.h2 style={{ y: titleY }} className="max-w-4xl text-4xl tracking-[-0.04em] text-white sm:text-6xl">Business platforms built around real operations.</motion.h2>
+          </div>
 
-        <div className="mt-12 lg:hidden">
-          {v2Projects.slice(0, 3).map((project, index) => <ProjectCard key={project.name} project={project} index={index} />)}
-        </div>
+          <div className="mt-12 lg:hidden">
+            {v2Projects.slice(0, 3).map((project, index) => <ProjectCard key={project.name} project={project} index={index} />)}
+          </div>
 
-        <div className="relative mt-14 hidden overflow-hidden lg:block">
-          <motion.div
-            style={{ x: desktopTrackX, width: `${desktopProjects.length * 100}%` }}
-            className="flex gap-8 will-change-transform"
-          >
-            {desktopProjects.map(project => <HorizontalProjectCard key={project.name} project={project} count={desktopProjects.length} />)}
-          </motion.div>
-        </div>
+          <div className="relative mt-14 hidden overflow-hidden lg:block">
+            <motion.div
+              style={{ x: desktopTrackX, width: `${desktopProjects.length * 100}%` }}
+              className="flex gap-8 will-change-transform"
+            >
+              {desktopProjects.map(project => <HorizontalProjectCard key={project.name} project={project} count={desktopProjects.length} />)}
+            </motion.div>
+          </div>
       </div>
     </section>
   )
